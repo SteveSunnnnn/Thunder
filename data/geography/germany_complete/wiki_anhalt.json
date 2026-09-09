@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "reference_url": "https://vic3.paradoxwikis.com/Victoria_3_Wiki",
+  "reference_image": "user-supplied Countries.png and read-only V3 1836 state-owner review",
+  "replaces_source_id": "DEU-1600",
+  "accuracy": "Independent district and geographic-control reconstruction of V3 opening polities; complete ownership, approximate fine boundaries.",
+  "locations": [
+    {
+      "key": "magdeburg",
+      "name": "Magdeburg",
+      "owner": "pru",
+      "districts": [
+        "Magdeburg, Kreisfreie Stadt",
+        "Börde"
+      ]
+    },
+    {
+      "key": "halle",
+      "name": "Halle",
+      "owner": "pru",
+      "districts": [
+        "Halle (Saale), Kreisfreie Stadt",
+        "Saalekreis"
+      ]
+    },
+    {
+      "key": "dessau_bitterfeld",
+      "name": "Dessau-Bitterfeld",
+      "owner": "anh",
+      "districts": [
+        "Dessau-Roßlau, Kreisfreie Stadt",
+        "Anhalt-Bitterfeld"
+      ],
+      "territory_controls": [
+        {
+          "key": "dessau",
+          "name": "Dessau",
+          "owner": "anh",
+          "lon": 12.245,
+          "lat": 51.831
+        },
+        {
+          "key": "bitterfeld",
+          "name": "Bitterfeld",
+          "owner": "pru",
+          "lon": 12.325,
+          "lat": 51.626
+        }
+      ]
+    },
+    {
+      "key": "altmarkkreis_salzwedel",
+      "name": "Altmarkkreis Salzwedel",
+      "owner": "pru",
+      "districts": [
+        "Altmarkkreis Salzwedel"
+      ]
+    },
+    {
+      "key": "burgenlandkreis",
+      "name": "Burgenlandkreis",
+      "owner": "pru",
+      "districts": [
+        "Burgenlandkreis"
+      ]
+    },
+    {
+      "key": "harz",
+      "name": "Harz",
+      "owner": "pru",
+      "districts": [
+        "Harz"
+      ],
+      "territory_controls": [
+        {
+          "key": "blankenburg",
+          "name": "Blankenburg",
+          "owner": "bra",
+          "lon": 10.962,
+          "lat": 51.791
+        },
+        {
+          "key": "halberstadt",
+          "name": "Halberstadt",
+          "owner": "pru",
+          "lon": 11.055,
+          "lat": 51.895
+        },
+        {
+          "key": "quedlinburg",
+          "name": "Quedlinburg",
+          "owner": "pru",
+          "lon": 11.152,
+          "lat": 51.785
+        }
+      ]
+    },
+    {
+      "key": "jerichower_land",
+      "name": "Jerichower Land",
+      "owner": "pru",
+      "districts": [
+        "Jerichower Land"
+      ]
+    },
+    {
+      "key": "mansfeld_sudharz",
+      "name": "Mansfeld-Südharz",
+      "owner": "pru",
+      "districts": [
+        "Mansfeld-Südharz"
+      ]
+    },
+    {
+      "key": "salzlandkreis",
+      "name": "Salzlandkreis",
+      "owner": "pru",
+      "districts": [
+        "Salzlandkreis"
+      ],
+      "territory_controls": [
+        {
+          "key": "bernburg",
+          "name": "Bernburg",
+          "owner": "anh",
+          "lon": 11.735,
+          "lat": 51.799
+        },
+        {
+          "key": "schoenebeck",
+          "name": "Schoenebeck",
+          "owner": "pru",
+          "lon": 11.741,
+          "lat": 52.02
+        }
+      ]
+    },
+    {
+      "key": "stendal",
+      "name": "Stendal",
+      "owner": "pru",
+      "districts": [
+        "Stendal"
+      ]
+    },
+    {
+      "key": "wittenberg",
+      "name": "Wittenberg",
+      "owner": "pru",
+      "districts": [
+        "Wittenberg"
+      ]
+    }
+  ]
+}

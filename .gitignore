@@ -1,0 +1,48 @@
+# Build trees
+/build/
+/build-*/
+/build-ci/
+/out/
+/validation-output/
+CMakeUserPresets.json
+compile_commands.json
+.cache/
+
+# Tool working state
+.workbuddy/
+.mimosa/
+
+# Generated runtime/content packages
+/generated/
+*.thunderworld.tmp
+*.thunderasset.tmp
+*.thunderarch.tmp
+*.thunderworld
+
+# 渲染调试产物（历史上曾堆积数百 MB 于仓库根目录）
+/*.bmp
+/*.png
+/*.jpg
+
+# Python/editor caches
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+
+# OS/compiler outputs
+.DS_Store
+Thumbs.db
+*.obj
+*.pdb
+*.ilk
+*.exe
+*.dll
+*.so
+*.dylib
+*.log
+*.save
+*.tmp
+
+# 例外：测试夹具必须入库（legacy v1 存档迁移测试依赖它）
+!tests/fixtures/*.save

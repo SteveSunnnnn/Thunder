@@ -1,0 +1,356 @@
+{
+  "schema_version": 1,
+  "reference_url": "https://vic3.paradoxwikis.com/Victoria_3_Wiki",
+  "reference_image": "user-supplied Countries.png and read-only V3 1836 state-owner review",
+  "replaces_source_id": "DEU-1572",
+  "accuracy": "Independent district and geographic-control reconstruction of V3 opening polities; complete ownership, approximate fine boundaries.",
+  "locations": [
+    {
+      "key": "duisburg",
+      "name": "Duisburg",
+      "owner": "pru",
+      "districts": [
+        "Duisburg, Kreisfreie Stadt",
+        "Oberhausen, Kreisfreie Stadt",
+        "Mülheim an der Ruhr, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "essen",
+      "name": "Essen",
+      "owner": "pru",
+      "districts": [
+        "Essen, Kreisfreie Stadt",
+        "Gelsenkirchen, Kreisfreie Stadt",
+        "Bottrop, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "bochum",
+      "name": "Bochum",
+      "owner": "pru",
+      "districts": [
+        "Bochum, Kreisfreie Stadt",
+        "Herne, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "dortmund",
+      "name": "Dortmund",
+      "owner": "pru",
+      "districts": [
+        "Dortmund, Kreisfreie Stadt",
+        "Unna"
+      ]
+    },
+    {
+      "key": "wuppertal",
+      "name": "Wuppertal",
+      "owner": "pru",
+      "districts": [
+        "Wuppertal, Kreisfreie Stadt",
+        "Remscheid, Kreisfreie Stadt",
+        "Solingen, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "koeln",
+      "name": "Köln",
+      "owner": "pru",
+      "districts": [
+        "Köln, Kreisfreie Stadt",
+        "Leverkusen, Kreisfreie Stadt",
+        "Rhein-Erft-Kreis"
+      ]
+    },
+    {
+      "key": "bonn",
+      "name": "Bonn",
+      "owner": "pru",
+      "districts": [
+        "Bonn, Kreisfreie Stadt",
+        "Rhein-Sieg-Kreis"
+      ]
+    },
+    {
+      "key": "bielefeld",
+      "name": "Bielefeld",
+      "owner": "pru",
+      "districts": [
+        "Bielefeld, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "borken",
+      "name": "Borken",
+      "owner": "pru",
+      "districts": [
+        "Borken"
+      ]
+    },
+    {
+      "key": "coesfeld",
+      "name": "Coesfeld",
+      "owner": "pru",
+      "districts": [
+        "Coesfeld"
+      ]
+    },
+    {
+      "key": "duren",
+      "name": "Düren",
+      "owner": "pru",
+      "districts": [
+        "Düren"
+      ]
+    },
+    {
+      "key": "dusseldorf",
+      "name": "Düsseldorf",
+      "owner": "pru",
+      "districts": [
+        "Düsseldorf, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "ennepe_ruhr_kreis",
+      "name": "Ennepe-Ruhr-Kreis",
+      "owner": "pru",
+      "districts": [
+        "Ennepe-Ruhr-Kreis"
+      ]
+    },
+    {
+      "key": "euskirchen",
+      "name": "Euskirchen",
+      "owner": "pru",
+      "districts": [
+        "Euskirchen"
+      ]
+    },
+    {
+      "key": "gutersloh",
+      "name": "Gütersloh",
+      "owner": "pru",
+      "districts": [
+        "Gütersloh"
+      ]
+    },
+    {
+      "key": "hagen",
+      "name": "Hagen",
+      "owner": "pru",
+      "districts": [
+        "Hagen, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "hamm",
+      "name": "Hamm",
+      "owner": "pru",
+      "districts": [
+        "Hamm, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "heinsberg",
+      "name": "Heinsberg",
+      "owner": "pru",
+      "districts": [
+        "Heinsberg"
+      ]
+    },
+    {
+      "key": "herford",
+      "name": "Herford",
+      "owner": "pru",
+      "districts": [
+        "Herford"
+      ]
+    },
+    {
+      "key": "hochsauerlandkreis",
+      "name": "Hochsauerlandkreis",
+      "owner": "pru",
+      "districts": [
+        "Hochsauerlandkreis"
+      ]
+    },
+    {
+      "key": "hoxter",
+      "name": "Höxter",
+      "owner": "pru",
+      "districts": [
+        "Höxter"
+      ]
+    },
+    {
+      "key": "kleve",
+      "name": "Kleve",
+      "owner": "pru",
+      "districts": [
+        "Kleve"
+      ]
+    },
+    {
+      "key": "krefeld",
+      "name": "Krefeld",
+      "owner": "pru",
+      "districts": [
+        "Krefeld, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "lippe",
+      "name": "Lippe",
+      "owner": "lip",
+      "districts": [
+        "Lippe"
+      ]
+    },
+    {
+      "key": "mettmann",
+      "name": "Mettmann",
+      "owner": "pru",
+      "districts": [
+        "Mettmann"
+      ]
+    },
+    {
+      "key": "minden_lubbecke",
+      "name": "Minden-Lübbecke",
+      "owner": "pru",
+      "districts": [
+        "Minden-Lübbecke"
+      ]
+    },
+    {
+      "key": "markischer_kreis",
+      "name": "Märkischer Kreis",
+      "owner": "pru",
+      "districts": [
+        "Märkischer Kreis"
+      ]
+    },
+    {
+      "key": "monchengladbach",
+      "name": "Mönchengladbach",
+      "owner": "pru",
+      "districts": [
+        "Mönchengladbach, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "munster",
+      "name": "Münster",
+      "owner": "pru",
+      "districts": [
+        "Münster, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "oberbergischer_kreis",
+      "name": "Oberbergischer Kreis",
+      "owner": "pru",
+      "districts": [
+        "Oberbergischer Kreis"
+      ]
+    },
+    {
+      "key": "olpe",
+      "name": "Olpe",
+      "owner": "pru",
+      "districts": [
+        "Olpe"
+      ]
+    },
+    {
+      "key": "paderborn",
+      "name": "Paderborn",
+      "owner": "pru",
+      "districts": [
+        "Paderborn"
+      ]
+    },
+    {
+      "key": "recklinghausen",
+      "name": "Recklinghausen",
+      "owner": "pru",
+      "districts": [
+        "Recklinghausen"
+      ]
+    },
+    {
+      "key": "rhein_kreis_neuss",
+      "name": "Rhein-Kreis Neuss",
+      "owner": "pru",
+      "districts": [
+        "Rhein-Kreis Neuss"
+      ]
+    },
+    {
+      "key": "rheinisch_bergischer_kreis",
+      "name": "Rheinisch-Bergischer Kreis",
+      "owner": "pru",
+      "districts": [
+        "Rheinisch-Bergischer Kreis"
+      ]
+    },
+    {
+      "key": "siegen_wittgenstein",
+      "name": "Siegen-Wittgenstein",
+      "owner": "pru",
+      "districts": [
+        "Siegen-Wittgenstein"
+      ]
+    },
+    {
+      "key": "soest",
+      "name": "Soest",
+      "owner": "pru",
+      "districts": [
+        "Soest"
+      ]
+    },
+    {
+      "key": "steinfurt",
+      "name": "Steinfurt",
+      "owner": "pru",
+      "districts": [
+        "Steinfurt"
+      ]
+    },
+    {
+      "key": "stadteregion_aachen",
+      "name": "Städteregion Aachen",
+      "owner": "pru",
+      "districts": [
+        "Städteregion Aachen"
+      ]
+    },
+    {
+      "key": "viersen",
+      "name": "Viersen",
+      "owner": "pru",
+      "districts": [
+        "Viersen"
+      ]
+    },
+    {
+      "key": "warendorf",
+      "name": "Warendorf",
+      "owner": "pru",
+      "districts": [
+        "Warendorf"
+      ]
+    },
+    {
+      "key": "wesel",
+      "name": "Wesel",
+      "owner": "pru",
+      "districts": [
+        "Wesel"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "reference_url": "https://vic3.paradoxwikis.com/Victoria_3_Wiki",
+  "reference_image": "user-supplied Countries.png and read-only V3 1836 state-owner review",
+  "replaces_source_id": "DEU-3488",
+  "accuracy": "Independent district and geographic-control reconstruction of V3 opening polities; complete ownership, approximate fine boundaries.",
+  "locations": [
+    {
+      "key": "rostock",
+      "name": "Rostock",
+      "owner": "mec",
+      "districts": [
+        "Rostock, Kreisfreie Stadt",
+        "Landkreis Rostock"
+      ]
+    },
+    {
+      "key": "schwerin",
+      "name": "Schwerin",
+      "owner": "mec",
+      "districts": [
+        "Schwerin, Kreisfreie Stadt",
+        "Ludwigslust-Parchim"
+      ]
+    },
+    {
+      "key": "mecklenburgische_seenplatte",
+      "name": "Mecklenburgische Seenplatte",
+      "owner": "mst",
+      "districts": [
+        "Mecklenburgische Seenplatte"
+      ],
+      "territory_controls": [
+        {
+          "key": "waren",
+          "name": "Waren",
+          "owner": "mec",
+          "lon": 12.687,
+          "lat": 53.522
+        },
+        {
+          "key": "neustrelitz",
+          "name": "Neustrelitz",
+          "owner": "mst",
+          "lon": 13.064,
+          "lat": 53.362
+        },
+        {
+          "key": "neubrandenburg",
+          "name": "Neubrandenburg",
+          "owner": "mst",
+          "lon": 13.262,
+          "lat": 53.557
+        }
+      ]
+    },
+    {
+      "key": "nordwestmecklenburg",
+      "name": "Nordwestmecklenburg",
+      "owner": "mec",
+      "districts": [
+        "Nordwestmecklenburg"
+      ],
+      "territory_controls": [
+        {
+          "key": "wismar",
+          "name": "Wismar",
+          "owner": "mec",
+          "lon": 11.465,
+          "lat": 53.89
+        },
+        {
+          "key": "schoenberg",
+          "name": "Schoenberg",
+          "owner": "mst",
+          "lon": 10.935,
+          "lat": 53.85
+        }
+      ]
+    },
+    {
+      "key": "vorpommern_greifswald",
+      "name": "Vorpommern-Greifswald",
+      "owner": "pru",
+      "districts": [
+        "Vorpommern-Greifswald"
+      ]
+    },
+    {
+      "key": "vorpommern_rugen",
+      "name": "Vorpommern-Rügen",
+      "owner": "pru",
+      "districts": [
+        "Vorpommern-Rügen"
+      ]
+    }
+  ]
+}

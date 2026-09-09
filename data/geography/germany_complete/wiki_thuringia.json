@@ -1,0 +1,222 @@
+{
+  "schema_version": 1,
+  "reference_url": "https://vic3.paradoxwikis.com/Victoria_3_Wiki",
+  "reference_image": "user-supplied Countries.png and read-only V3 1836 state-owner review",
+  "replaces_source_id": "DEU-1577",
+  "accuracy": "Independent district and geographic-control reconstruction of V3 opening polities; complete ownership, approximate fine boundaries.",
+  "locations": [
+    {
+      "key": "eisenach",
+      "name": "Eisenach",
+      "owner": "wei",
+      "districts": [
+        "Eisenach, Kreisfreie Stadt",
+        "Wartburgkreis"
+      ]
+    },
+    {
+      "key": "gera",
+      "name": "Gera",
+      "owner": "mei",
+      "districts": [
+        "Gera, Kreisfreie Stadt",
+        "Greiz"
+      ]
+    },
+    {
+      "key": "weimar",
+      "name": "Weimar",
+      "owner": "wei",
+      "districts": [
+        "Weimar, Kreisfreie Stadt",
+        "Weimarer Land"
+      ]
+    },
+    {
+      "key": "jena",
+      "name": "Jena",
+      "owner": "wei",
+      "districts": [
+        "Jena, Kreisfreie Stadt",
+        "Saale-Holzland-Kreis"
+      ]
+    },
+    {
+      "key": "suhl_hildburghausen",
+      "name": "Suhl-Hildburghausen",
+      "owner": "mei",
+      "districts": [
+        "Suhl, Kreisfreie Stadt",
+        "Hildburghausen"
+      ],
+      "territory_controls": [
+        {
+          "key": "suhl",
+          "name": "Suhl",
+          "owner": "pru",
+          "lon": 10.72,
+          "lat": 50.56
+        },
+        {
+          "key": "hildburghausen",
+          "name": "Hildburghausen",
+          "owner": "mei",
+          "lon": 10.728,
+          "lat": 50.426
+        }
+      ]
+    },
+    {
+      "key": "altenburger_land",
+      "name": "Altenburger Land",
+      "owner": "mei",
+      "districts": [
+        "Altenburger Land"
+      ]
+    },
+    {
+      "key": "eichsfeld",
+      "name": "Eichsfeld",
+      "owner": "pru",
+      "districts": [
+        "Eichsfeld"
+      ]
+    },
+    {
+      "key": "erfurt",
+      "name": "Erfurt",
+      "owner": "pru",
+      "districts": [
+        "Erfurt, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "gotha",
+      "name": "Gotha",
+      "owner": "cob",
+      "districts": [
+        "Gotha"
+      ]
+    },
+    {
+      "key": "ilm_kreis",
+      "name": "Ilm-Kreis",
+      "owner": "scw",
+      "districts": [
+        "Ilm-Kreis"
+      ],
+      "territory_controls": [
+        {
+          "key": "arnstadt",
+          "name": "Arnstadt",
+          "owner": "scw",
+          "lon": 10.949,
+          "lat": 50.834
+        },
+        {
+          "key": "ilmenau",
+          "name": "Ilmenau",
+          "owner": "wei",
+          "lon": 10.915,
+          "lat": 50.686
+        }
+      ]
+    },
+    {
+      "key": "kyffhauserkreis",
+      "name": "Kyffhäuserkreis",
+      "owner": "pru",
+      "districts": [
+        "Kyffhäuserkreis"
+      ]
+    },
+    {
+      "key": "nordhausen",
+      "name": "Nordhausen",
+      "owner": "pru",
+      "districts": [
+        "Nordhausen"
+      ]
+    },
+    {
+      "key": "saale_orla_kreis",
+      "name": "Saale-Orla-Kreis",
+      "owner": "mei",
+      "districts": [
+        "Saale-Orla-Kreis"
+      ]
+    },
+    {
+      "key": "saalfeld_rudolstadt",
+      "name": "Saalfeld-Rudolstadt",
+      "owner": "scw",
+      "districts": [
+        "Saalfeld-Rudolstadt"
+      ],
+      "territory_controls": [
+        {
+          "key": "rudolstadt",
+          "name": "Rudolstadt",
+          "owner": "scw",
+          "lon": 11.329,
+          "lat": 50.721
+        },
+        {
+          "key": "saalfeld",
+          "name": "Saalfeld",
+          "owner": "mei",
+          "lon": 11.359,
+          "lat": 50.649
+        }
+      ]
+    },
+    {
+      "key": "schmalkalden_meiningen",
+      "name": "Schmalkalden-Meiningen",
+      "owner": "mei",
+      "districts": [
+        "Schmalkalden-Meiningen"
+      ],
+      "territory_controls": [
+        {
+          "key": "schmalkalden",
+          "name": "Schmalkalden",
+          "owner": "hek",
+          "lon": 10.45,
+          "lat": 50.72
+        },
+        {
+          "key": "meiningen",
+          "name": "Meiningen",
+          "owner": "mei",
+          "lon": 10.41,
+          "lat": 50.57
+        }
+      ]
+    },
+    {
+      "key": "sonneberg",
+      "name": "Sonneberg",
+      "owner": "mei",
+      "districts": [
+        "Sonneberg"
+      ]
+    },
+    {
+      "key": "sommerda",
+      "name": "Sömmerda",
+      "owner": "pru",
+      "districts": [
+        "Sömmerda"
+      ]
+    },
+    {
+      "key": "unstrut_hainich_kreis",
+      "name": "Unstrut-Hainich-Kreis",
+      "owner": "pru",
+      "districts": [
+        "Unstrut-Hainich-Kreis"
+      ]
+    }
+  ]
+}

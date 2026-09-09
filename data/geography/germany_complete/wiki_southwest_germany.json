@@ -1,0 +1,330 @@
+{
+  "schema_version": 1,
+  "reference_url": "https://vic3.paradoxwikis.com/Victoria_3_Wiki",
+  "reference_image": "user-supplied Countries.png",
+  "replaces_source_id": "DEU-1573",
+  "accuracy": "Complete owner assignment with independently authored control-based approximations inside mixed districts. Exact historical border surveying remains a separate accuracy task.",
+  "locations": [
+    {
+      "key": "karlsruhe",
+      "name": "Karlsruhe",
+      "owner": "bad",
+      "districts": [
+        "Karlsruhe, Stadtkreis",
+        "Karlsruhe, Landkreis"
+      ]
+    },
+    {
+      "key": "baden_baden",
+      "name": "Baden-Baden",
+      "owner": "bad",
+      "districts": [
+        "Baden-Baden, Stadtkreis",
+        "Rastatt"
+      ]
+    },
+    {
+      "key": "heidelberg",
+      "name": "Heidelberg",
+      "owner": "bad",
+      "districts": [
+        "Heidelberg, Stadtkreis",
+        "Mannheim, Stadtkreis",
+        "Rhein-Neckar-Kreis"
+      ]
+    },
+    {
+      "key": "mosbach",
+      "name": "Mosbach",
+      "owner": "bad",
+      "districts": [
+        "Neckar-Odenwald-Kreis"
+      ]
+    },
+    {
+      "key": "main_tauber",
+      "name": "Main-Tauber",
+      "owner": "",
+      "districts": [
+        "Main-Tauber-Kreis"
+      ],
+      "territory_controls": [
+        {
+          "key": "tauberbischofsheim",
+          "name": "Tauberbischofsheim",
+          "owner": "bad",
+          "lon": 9.663,
+          "lat": 49.625
+        },
+        {
+          "key": "mergentheim",
+          "name": "Mergentheim",
+          "owner": "wur",
+          "lon": 9.773,
+          "lat": 49.493
+        }
+      ]
+    },
+    {
+      "key": "pforzheim",
+      "name": "Pforzheim",
+      "owner": "bad",
+      "districts": [
+        "Pforzheim, Stadtkreis",
+        "Enzkreis"
+      ],
+      "territory_controls": [
+        {
+          "key": "pforzheim",
+          "name": "Pforzheim",
+          "owner": "bad",
+          "lon": 8.704,
+          "lat": 48.894
+        },
+        {
+          "key": "muehlacker",
+          "name": "Muehlacker",
+          "owner": "wur",
+          "lon": 8.853,
+          "lat": 48.945
+        }
+      ]
+    },
+    {
+      "key": "freiburg",
+      "name": "Freiburg",
+      "owner": "bad",
+      "districts": [
+        "Freiburg im Breisgau, Stadtkreis",
+        "Breisgau-Hochschwarzwald",
+        "Emmendingen"
+      ]
+    },
+    {
+      "key": "offenburg",
+      "name": "Offenburg",
+      "owner": "bad",
+      "districts": [
+        "Ortenaukreis"
+      ]
+    },
+    {
+      "key": "loerrach",
+      "name": "Lörrach",
+      "owner": "bad",
+      "districts": [
+        "Lörrach"
+      ]
+    },
+    {
+      "key": "waldshut",
+      "name": "Waldshut",
+      "owner": "bad",
+      "districts": [
+        "Waldshut"
+      ]
+    },
+    {
+      "key": "konstanz",
+      "name": "Konstanz",
+      "owner": "bad",
+      "districts": [
+        "Konstanz"
+      ]
+    },
+    {
+      "key": "schwarzwald_baar",
+      "name": "Schwarzwald-Baar",
+      "owner": "",
+      "districts": [
+        "Schwarzwald-Baar-Kreis"
+      ],
+      "territory_controls": [
+        {
+          "key": "villingen",
+          "name": "Villingen",
+          "owner": "bad",
+          "lon": 8.461,
+          "lat": 48.061
+        },
+        {
+          "key": "schwenningen",
+          "name": "Schwenningen",
+          "owner": "wur",
+          "lon": 8.535,
+          "lat": 48.06
+        }
+      ]
+    },
+    {
+      "key": "stuttgart",
+      "name": "Stuttgart",
+      "owner": "wur",
+      "districts": [
+        "Stuttgart, Stadtkreis",
+        "Ludwigsburg",
+        "Esslingen"
+      ]
+    },
+    {
+      "key": "boeblingen",
+      "name": "Böblingen",
+      "owner": "wur",
+      "districts": [
+        "Böblingen"
+      ]
+    },
+    {
+      "key": "heilbronn",
+      "name": "Heilbronn",
+      "owner": "wur",
+      "districts": [
+        "Heilbronn, Stadtkreis",
+        "Heilbronn, Landkreis",
+        "Hohenlohekreis"
+      ]
+    },
+    {
+      "key": "schwaebisch_hall",
+      "name": "Schwäbisch Hall",
+      "owner": "wur",
+      "districts": [
+        "Schwäbisch Hall",
+        "Rems-Murr-Kreis"
+      ]
+    },
+    {
+      "key": "heidenheim",
+      "name": "Heidenheim",
+      "owner": "wur",
+      "districts": [
+        "Heidenheim",
+        "Ostalbkreis"
+      ]
+    },
+    {
+      "key": "calw",
+      "name": "Calw",
+      "owner": "wur",
+      "districts": [
+        "Calw",
+        "Freudenstadt"
+      ]
+    },
+    {
+      "key": "tuebingen",
+      "name": "Tübingen",
+      "owner": "wur",
+      "districts": [
+        "Tübingen, Landkreis",
+        "Reutlingen"
+      ]
+    },
+    {
+      "key": "rottweil",
+      "name": "Rottweil",
+      "owner": "wur",
+      "districts": [
+        "Rottweil",
+        "Tuttlingen"
+      ]
+    },
+    {
+      "key": "ulm",
+      "name": "Ulm",
+      "owner": "wur",
+      "districts": [
+        "Ulm, Stadtkreis",
+        "Alb-Donau-Kreis"
+      ]
+    },
+    {
+      "key": "biberach",
+      "name": "Biberach",
+      "owner": "wur",
+      "districts": [
+        "Biberach",
+        "Ravensburg"
+      ]
+    },
+    {
+      "key": "balingen",
+      "name": "Balingen",
+      "owner": "wur",
+      "districts": [
+        "Zollernalbkreis"
+      ],
+      "territory_controls": [
+        {
+          "key": "balingen",
+          "name": "Balingen",
+          "owner": "wur",
+          "lon": 8.85,
+          "lat": 48.275
+        },
+        {
+          "key": "hechingen",
+          "name": "Hechingen",
+          "owner": "hoh",
+          "lon": 8.965,
+          "lat": 48.352
+        }
+      ]
+    },
+    {
+      "key": "sigmaringen",
+      "name": "Sigmaringen",
+      "owner": "hoh",
+      "districts": [
+        "Sigmaringen"
+      ],
+      "territory_controls": [
+        {
+          "key": "sigmaringen",
+          "name": "Sigmaringen",
+          "owner": "hoh",
+          "lon": 9.22,
+          "lat": 48.088
+        },
+        {
+          "key": "saulgau",
+          "name": "Saulgau",
+          "owner": "wur",
+          "lon": 9.5,
+          "lat": 48.017
+        },
+        {
+          "key": "pfullendorf",
+          "name": "Pfullendorf",
+          "owner": "bad",
+          "lon": 9.251,
+          "lat": 47.923
+        }
+      ]
+    },
+    {
+      "key": "bodensee",
+      "name": "Bodensee",
+      "owner": "",
+      "districts": [
+        "Bodenseekreis"
+      ],
+      "territory_controls": [
+        {
+          "key": "ueberlingen",
+          "name": "Ueberlingen",
+          "owner": "bad",
+          "lon": 9.19,
+          "lat": 47.75
+        },
+        {
+          "key": "friedrichshafen",
+          "name": "Friedrichshafen",
+          "owner": "wur",
+          "lon": 9.49,
+          "lat": 47.66
+        }
+      ]
+    }
+  ]
+}

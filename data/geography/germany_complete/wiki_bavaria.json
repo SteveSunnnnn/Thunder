@@ -1,0 +1,672 @@
+{
+  "schema_version": 1,
+  "reference_url": "https://vic3.paradoxwikis.com/Victoria_3_Wiki",
+  "reference_image": "user-supplied Countries.png and read-only V3 1836 state-owner review",
+  "replaces_source_id": "DEU-1591",
+  "accuracy": "Independent district and geographic-control reconstruction of V3 opening polities; complete ownership, approximate fine boundaries.",
+  "locations": [
+    {
+      "key": "ansbach",
+      "name": "Ansbach",
+      "owner": "bav",
+      "districts": [
+        "Ansbach, Kreisfreie Stadt",
+        "Ansbach, Landkreis"
+      ]
+    },
+    {
+      "key": "aschaffenburg",
+      "name": "Aschaffenburg",
+      "owner": "bav",
+      "districts": [
+        "Aschaffenburg, Kreisfreie Stadt",
+        "Aschaffenburg, Landkreis"
+      ]
+    },
+    {
+      "key": "augsburg",
+      "name": "Augsburg",
+      "owner": "bav",
+      "districts": [
+        "Augsburg, Kreisfreie Stadt",
+        "Augsburg, Landkreis"
+      ]
+    },
+    {
+      "key": "bamberg",
+      "name": "Bamberg",
+      "owner": "bav",
+      "districts": [
+        "Bamberg, Kreisfreie Stadt",
+        "Bamberg, Landkreis"
+      ]
+    },
+    {
+      "key": "bayreuth",
+      "name": "Bayreuth",
+      "owner": "bav",
+      "districts": [
+        "Bayreuth, Kreisfreie Stadt",
+        "Bayreuth, Landkreis"
+      ]
+    },
+    {
+      "key": "coburg",
+      "name": "Coburg",
+      "owner": "cob",
+      "districts": [
+        "Coburg, Kreisfreie Stadt",
+        "Coburg, Landkreis"
+      ]
+    },
+    {
+      "key": "furth",
+      "name": "Fürth",
+      "owner": "bav",
+      "districts": [
+        "Fürth, Kreisfreie Stadt",
+        "Fürth, Landkreis"
+      ]
+    },
+    {
+      "key": "hof",
+      "name": "Hof",
+      "owner": "bav",
+      "districts": [
+        "Hof, Kreisfreie Stadt",
+        "Hof, Landkreis"
+      ]
+    },
+    {
+      "key": "landshut",
+      "name": "Landshut",
+      "owner": "bav",
+      "districts": [
+        "Landshut, Kreisfreie Stadt",
+        "Landshut, Landkreis"
+      ]
+    },
+    {
+      "key": "munchen",
+      "name": "München",
+      "owner": "bav",
+      "districts": [
+        "München, Kreisfreie Stadt",
+        "München, Landkreis"
+      ]
+    },
+    {
+      "key": "passau",
+      "name": "Passau",
+      "owner": "bav",
+      "districts": [
+        "Passau, Kreisfreie Stadt",
+        "Passau, Landkreis"
+      ]
+    },
+    {
+      "key": "regensburg",
+      "name": "Regensburg",
+      "owner": "bav",
+      "districts": [
+        "Regensburg, Kreisfreie Stadt",
+        "Regensburg, Landkreis"
+      ]
+    },
+    {
+      "key": "rosenheim",
+      "name": "Rosenheim",
+      "owner": "bav",
+      "districts": [
+        "Rosenheim, Kreisfreie Stadt",
+        "Rosenheim, Landkreis"
+      ]
+    },
+    {
+      "key": "schweinfurt",
+      "name": "Schweinfurt",
+      "owner": "bav",
+      "districts": [
+        "Schweinfurt, Kreisfreie Stadt",
+        "Schweinfurt, Landkreis"
+      ]
+    },
+    {
+      "key": "wurzburg",
+      "name": "Würzburg",
+      "owner": "bav",
+      "districts": [
+        "Würzburg, Kreisfreie Stadt",
+        "Würzburg, Landkreis"
+      ]
+    },
+    {
+      "key": "aichach_friedberg",
+      "name": "Aichach-Friedberg",
+      "owner": "bav",
+      "districts": [
+        "Aichach-Friedberg"
+      ]
+    },
+    {
+      "key": "altotting",
+      "name": "Altötting",
+      "owner": "bav",
+      "districts": [
+        "Altötting"
+      ]
+    },
+    {
+      "key": "amberg",
+      "name": "Amberg",
+      "owner": "bav",
+      "districts": [
+        "Amberg, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "amberg_sulzbach",
+      "name": "Amberg-Sulzbach",
+      "owner": "bav",
+      "districts": [
+        "Amberg-Sulzbach"
+      ]
+    },
+    {
+      "key": "bad_kissingen",
+      "name": "Bad Kissingen",
+      "owner": "bav",
+      "districts": [
+        "Bad Kissingen"
+      ]
+    },
+    {
+      "key": "bad_tolz_wolfratshausen",
+      "name": "Bad Tölz-Wolfratshausen",
+      "owner": "bav",
+      "districts": [
+        "Bad Tölz-Wolfratshausen"
+      ]
+    },
+    {
+      "key": "berchtesgadener_land",
+      "name": "Berchtesgadener Land",
+      "owner": "bav",
+      "districts": [
+        "Berchtesgadener Land"
+      ]
+    },
+    {
+      "key": "cham",
+      "name": "Cham",
+      "owner": "bav",
+      "districts": [
+        "Cham"
+      ]
+    },
+    {
+      "key": "dachau",
+      "name": "Dachau",
+      "owner": "bav",
+      "districts": [
+        "Dachau"
+      ]
+    },
+    {
+      "key": "deggendorf",
+      "name": "Deggendorf",
+      "owner": "bav",
+      "districts": [
+        "Deggendorf"
+      ]
+    },
+    {
+      "key": "dillingen_a_d_donau",
+      "name": "Dillingen a.d. Donau",
+      "owner": "bav",
+      "districts": [
+        "Dillingen a.d. Donau"
+      ]
+    },
+    {
+      "key": "dingolfing_landau",
+      "name": "Dingolfing-Landau",
+      "owner": "bav",
+      "districts": [
+        "Dingolfing-Landau"
+      ]
+    },
+    {
+      "key": "donau_ries",
+      "name": "Donau-Ries",
+      "owner": "bav",
+      "districts": [
+        "Donau-Ries"
+      ]
+    },
+    {
+      "key": "ebersberg",
+      "name": "Ebersberg",
+      "owner": "bav",
+      "districts": [
+        "Ebersberg"
+      ]
+    },
+    {
+      "key": "eichstatt",
+      "name": "Eichstätt",
+      "owner": "bav",
+      "districts": [
+        "Eichstätt"
+      ]
+    },
+    {
+      "key": "erding",
+      "name": "Erding",
+      "owner": "bav",
+      "districts": [
+        "Erding"
+      ]
+    },
+    {
+      "key": "erlangen",
+      "name": "Erlangen",
+      "owner": "bav",
+      "districts": [
+        "Erlangen, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "erlangen_hochstadt",
+      "name": "Erlangen-Höchstadt",
+      "owner": "bav",
+      "districts": [
+        "Erlangen-Höchstadt"
+      ]
+    },
+    {
+      "key": "forchheim",
+      "name": "Forchheim",
+      "owner": "bav",
+      "districts": [
+        "Forchheim"
+      ]
+    },
+    {
+      "key": "freising",
+      "name": "Freising",
+      "owner": "bav",
+      "districts": [
+        "Freising"
+      ]
+    },
+    {
+      "key": "freyung_grafenau",
+      "name": "Freyung-Grafenau",
+      "owner": "bav",
+      "districts": [
+        "Freyung-Grafenau"
+      ]
+    },
+    {
+      "key": "furstenfeldbruck",
+      "name": "Fürstenfeldbruck",
+      "owner": "bav",
+      "districts": [
+        "Fürstenfeldbruck"
+      ]
+    },
+    {
+      "key": "garmisch_partenkirchen",
+      "name": "Garmisch-Partenkirchen",
+      "owner": "bav",
+      "districts": [
+        "Garmisch-Partenkirchen"
+      ]
+    },
+    {
+      "key": "gunzburg",
+      "name": "Günzburg",
+      "owner": "bav",
+      "districts": [
+        "Günzburg"
+      ]
+    },
+    {
+      "key": "haberge",
+      "name": "Haßberge",
+      "owner": "bav",
+      "districts": [
+        "Haßberge"
+      ]
+    },
+    {
+      "key": "ingolstadt",
+      "name": "Ingolstadt",
+      "owner": "bav",
+      "districts": [
+        "Ingolstadt, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "kaufbeuren",
+      "name": "Kaufbeuren",
+      "owner": "bav",
+      "districts": [
+        "Kaufbeuren, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "kelheim",
+      "name": "Kelheim",
+      "owner": "bav",
+      "districts": [
+        "Kelheim"
+      ]
+    },
+    {
+      "key": "kempten_allgau",
+      "name": "Kempten (Allgäu)",
+      "owner": "bav",
+      "districts": [
+        "Kempten (Allgäu), Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "kitzingen",
+      "name": "Kitzingen",
+      "owner": "bav",
+      "districts": [
+        "Kitzingen"
+      ]
+    },
+    {
+      "key": "kronach",
+      "name": "Kronach",
+      "owner": "bav",
+      "districts": [
+        "Kronach"
+      ]
+    },
+    {
+      "key": "kulmbach",
+      "name": "Kulmbach",
+      "owner": "bav",
+      "districts": [
+        "Kulmbach"
+      ]
+    },
+    {
+      "key": "landsberg_am_lech",
+      "name": "Landsberg am Lech",
+      "owner": "bav",
+      "districts": [
+        "Landsberg am Lech"
+      ]
+    },
+    {
+      "key": "lichtenfels",
+      "name": "Lichtenfels",
+      "owner": "bav",
+      "districts": [
+        "Lichtenfels"
+      ]
+    },
+    {
+      "key": "lindau_bodensee",
+      "name": "Lindau (Bodensee)",
+      "owner": "bav",
+      "districts": [
+        "Lindau (Bodensee)"
+      ]
+    },
+    {
+      "key": "main_spessart",
+      "name": "Main-Spessart",
+      "owner": "bav",
+      "districts": [
+        "Main-Spessart"
+      ]
+    },
+    {
+      "key": "memmingen",
+      "name": "Memmingen",
+      "owner": "bav",
+      "districts": [
+        "Memmingen, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "miesbach",
+      "name": "Miesbach",
+      "owner": "bav",
+      "districts": [
+        "Miesbach"
+      ]
+    },
+    {
+      "key": "miltenberg",
+      "name": "Miltenberg",
+      "owner": "bav",
+      "districts": [
+        "Miltenberg"
+      ]
+    },
+    {
+      "key": "muhldorf_a_inn",
+      "name": "Mühldorf a. Inn",
+      "owner": "bav",
+      "districts": [
+        "Mühldorf a. Inn"
+      ]
+    },
+    {
+      "key": "neu_ulm",
+      "name": "Neu-Ulm",
+      "owner": "bav",
+      "districts": [
+        "Neu-Ulm"
+      ]
+    },
+    {
+      "key": "neuburg_schrobenhausen",
+      "name": "Neuburg-Schrobenhausen",
+      "owner": "bav",
+      "districts": [
+        "Neuburg-Schrobenhausen"
+      ]
+    },
+    {
+      "key": "neumarkt_i_d_opf",
+      "name": "Neumarkt i.d. OPf.",
+      "owner": "bav",
+      "districts": [
+        "Neumarkt i.d. OPf."
+      ]
+    },
+    {
+      "key": "neustadt_a_d_aisch_bad_windsheim",
+      "name": "Neustadt a.d. Aisch-Bad Windsheim",
+      "owner": "bav",
+      "districts": [
+        "Neustadt a.d. Aisch-Bad Windsheim"
+      ]
+    },
+    {
+      "key": "neustadt_a_d_waldnaab",
+      "name": "Neustadt a.d. Waldnaab",
+      "owner": "bav",
+      "districts": [
+        "Neustadt a.d. Waldnaab"
+      ]
+    },
+    {
+      "key": "nurnberg",
+      "name": "Nürnberg",
+      "owner": "bav",
+      "districts": [
+        "Nürnberg, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "nurnberger_land",
+      "name": "Nürnberger Land",
+      "owner": "bav",
+      "districts": [
+        "Nürnberger Land"
+      ]
+    },
+    {
+      "key": "oberallgau",
+      "name": "Oberallgäu",
+      "owner": "bav",
+      "districts": [
+        "Oberallgäu"
+      ]
+    },
+    {
+      "key": "ostallgau",
+      "name": "Ostallgäu",
+      "owner": "bav",
+      "districts": [
+        "Ostallgäu"
+      ]
+    },
+    {
+      "key": "pfaffenhofen_a_d_ilm",
+      "name": "Pfaffenhofen a.d. Ilm",
+      "owner": "bav",
+      "districts": [
+        "Pfaffenhofen a.d. Ilm"
+      ]
+    },
+    {
+      "key": "regen",
+      "name": "Regen",
+      "owner": "bav",
+      "districts": [
+        "Regen"
+      ]
+    },
+    {
+      "key": "rhon_grabfeld",
+      "name": "Rhön-Grabfeld",
+      "owner": "bav",
+      "districts": [
+        "Rhön-Grabfeld"
+      ]
+    },
+    {
+      "key": "roth",
+      "name": "Roth",
+      "owner": "bav",
+      "districts": [
+        "Roth"
+      ]
+    },
+    {
+      "key": "rottal_inn",
+      "name": "Rottal-Inn",
+      "owner": "bav",
+      "districts": [
+        "Rottal-Inn"
+      ]
+    },
+    {
+      "key": "schwabach",
+      "name": "Schwabach",
+      "owner": "bav",
+      "districts": [
+        "Schwabach, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "schwandorf",
+      "name": "Schwandorf",
+      "owner": "bav",
+      "districts": [
+        "Schwandorf"
+      ]
+    },
+    {
+      "key": "starnberg",
+      "name": "Starnberg",
+      "owner": "bav",
+      "districts": [
+        "Starnberg"
+      ]
+    },
+    {
+      "key": "straubing",
+      "name": "Straubing",
+      "owner": "bav",
+      "districts": [
+        "Straubing, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "straubing_bogen",
+      "name": "Straubing-Bogen",
+      "owner": "bav",
+      "districts": [
+        "Straubing-Bogen"
+      ]
+    },
+    {
+      "key": "tirschenreuth",
+      "name": "Tirschenreuth",
+      "owner": "bav",
+      "districts": [
+        "Tirschenreuth"
+      ]
+    },
+    {
+      "key": "traunstein",
+      "name": "Traunstein",
+      "owner": "bav",
+      "districts": [
+        "Traunstein"
+      ]
+    },
+    {
+      "key": "unterallgau",
+      "name": "Unterallgäu",
+      "owner": "bav",
+      "districts": [
+        "Unterallgäu"
+      ]
+    },
+    {
+      "key": "weiden_i_d_opf",
+      "name": "Weiden i.d. Opf",
+      "owner": "bav",
+      "districts": [
+        "Weiden i.d. Opf, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "weilheim_schongau",
+      "name": "Weilheim-Schongau",
+      "owner": "bav",
+      "districts": [
+        "Weilheim-Schongau"
+      ]
+    },
+    {
+      "key": "weienburg_gunzenhausen",
+      "name": "Weißenburg-Gunzenhausen",
+      "owner": "bav",
+      "districts": [
+        "Weißenburg-Gunzenhausen"
+      ]
+    },
+    {
+      "key": "wunsiedel_i_fichtelgebirge",
+      "name": "Wunsiedel i. Fichtelgebirge",
+      "owner": "bav",
+      "districts": [
+        "Wunsiedel i. Fichtelgebirge"
+      ]
+    }
+  ]
+}

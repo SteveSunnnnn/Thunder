@@ -1,0 +1,33 @@
+name: Thunder Engine CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dependencies
+        run: sudo apt-get update && sudo apt-get install -y ninja-build libzstd-dev libxxhash-dev
+      - name: Configure
+        run: cmake -S . -B build-ci -G Ninja -DCMAKE_BUILD_TYPE=Release -DTHUNDER_WARNINGS_AS_ERRORS=ON
+      - name: Build
+        run: cmake --build build-ci --parallel 2
+      - name: Run Test Suites (27 Test Suites Merge Gate)
+        run: ctest --test-dir build-ci --output-on-failure
+
+  vulkan:
+    # Presentation-layer merge gate: ~37% of the codebase previously had no CI.
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dependencies
+        run: sudo apt-get update && sudo apt-get install -y ninja-build libzstd-dev libxxhash-dev libvulkan-dev glslc && glslc --version
+      - name: Configure (Vulkan backend + tests)
+        run: cmake -S . -B build-vulkan -G Ninja -DCMAKE_BUILD_TYPE=Release -DTHUNDER_BUILD_VULKAN=ON -DTHUNDER_WARNINGS_AS_ERRORS=OFF
+      - name: Build
+        run: cmake --build build-vulkan --parallel 2
+      - name: Run Test Suites
+        run: ctest --test-dir build-vulkan --output-on-failure

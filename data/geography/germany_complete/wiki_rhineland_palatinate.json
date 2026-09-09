@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "reference_url": "https://vic3.paradoxwikis.com/Victoria_3_Wiki",
+  "reference_image": "user-supplied Countries.png; installed V3 factual review of Rhineland and Hesse",
+  "replaces_source_id": "DEU-1580",
+  "pending_state": "rhineland_pending",
+  "accuracy": "Complete owner assignment with independently authored control-based approximations inside mixed districts. Exact historical border surveying remains a separate accuracy task.",
+  "locations": [
+    {
+      "key": "trier",
+      "name": "Trier",
+      "owner": "pru",
+      "districts": [
+        "Trier, Kreisfreie Stadt",
+        "Trier-Saarburg"
+      ]
+    },
+    {
+      "key": "bitburg",
+      "name": "Bitburg-Prüm",
+      "owner": "pru",
+      "districts": [
+        "Eifelkreis Bitburg-Prüm"
+      ]
+    },
+    {
+      "key": "vulkaneifel",
+      "name": "Vulkaneifel",
+      "owner": "pru",
+      "districts": [
+        "Vulkaneifel"
+      ]
+    },
+    {
+      "key": "bernkastel",
+      "name": "Bernkastel-Wittlich",
+      "owner": "pru",
+      "districts": [
+        "Bernkastel-Wittlich"
+      ]
+    },
+    {
+      "key": "cochem",
+      "name": "Cochem-Zell",
+      "owner": "pru",
+      "districts": [
+        "Cochem-Zell"
+      ]
+    },
+    {
+      "key": "ahrweiler",
+      "name": "Ahrweiler",
+      "owner": "pru",
+      "districts": [
+        "Ahrweiler"
+      ]
+    },
+    {
+      "key": "koblenz",
+      "name": "Koblenz",
+      "owner": "pru",
+      "districts": [
+        "Koblenz, Kreisfreie Stadt",
+        "Mayen-Koblenz"
+      ]
+    },
+    {
+      "key": "neuwied",
+      "name": "Neuwied",
+      "owner": "pru",
+      "districts": [
+        "Neuwied",
+        "Altenkirchen (Westerwald)"
+      ]
+    },
+    {
+      "key": "hunsrueck",
+      "name": "Hunsrück",
+      "owner": "pru",
+      "districts": [
+        "Rhein-Hunsrück-Kreis"
+      ]
+    },
+    {
+      "key": "kreuznach",
+      "name": "Bad Kreuznach",
+      "owner": "pru",
+      "districts": [
+        "Bad Kreuznach"
+      ]
+    },
+    {
+      "key": "westerwald",
+      "name": "Westerwald",
+      "owner": "nas",
+      "districts": [
+        "Westerwaldkreis"
+      ]
+    },
+    {
+      "key": "rhein_lahn",
+      "name": "Rhein-Lahn",
+      "owner": "nas",
+      "districts": [
+        "Rhein-Lahn-Kreis"
+      ]
+    },
+    {
+      "key": "mainz",
+      "name": "Mainz",
+      "owner": "hes",
+      "districts": [
+        "Mainz, Kreisfreie Stadt",
+        "Mainz-Bingen"
+      ]
+    },
+    {
+      "key": "worms",
+      "name": "Worms",
+      "owner": "hes",
+      "districts": [
+        "Worms, Kreisfreie Stadt",
+        "Alzey-Worms"
+      ]
+    },
+    {
+      "key": "kaiserslautern",
+      "name": "Kaiserslautern",
+      "owner": "bav",
+      "districts": [
+        "Kaiserslautern, Kreisfreie Stadt",
+        "Kaiserslautern, Landkreis"
+      ]
+    },
+    {
+      "key": "kusel",
+      "name": "Kusel",
+      "owner": "bav",
+      "districts": [
+        "Kusel"
+      ]
+    },
+    {
+      "key": "donnersberg",
+      "name": "Donnersberg",
+      "owner": "bav",
+      "districts": [
+        "Donnersbergkreis"
+      ]
+    },
+    {
+      "key": "frankenthal",
+      "name": "Frankenthal",
+      "owner": "bav",
+      "districts": [
+        "Ludwigshafen am Rhein, Kreisfreie Stadt",
+        "Frankenthal (Pfalz), Kreisfreie Stadt",
+        "Rhein-Pfalz-Kreis"
+      ]
+    },
+    {
+      "key": "speyer",
+      "name": "Speyer",
+      "owner": "bav",
+      "districts": [
+        "Speyer, Kreisfreie Stadt",
+        "Germersheim"
+      ]
+    },
+    {
+      "key": "neustadt_pfalz",
+      "name": "Neustadt",
+      "owner": "bav",
+      "districts": [
+        "Neustadt an der Weinstraße, Kreisfreie Stadt",
+        "Bad Dürkheim"
+      ]
+    },
+    {
+      "key": "landau",
+      "name": "Landau",
+      "owner": "bav",
+      "districts": [
+        "Landau in der Pfalz, Kreisfreie Stadt",
+        "Südliche Weinstraße"
+      ]
+    },
+    {
+      "key": "pirmasens",
+      "name": "Pirmasens",
+      "owner": "bav",
+      "districts": [
+        "Pirmasens, Kreisfreie Stadt",
+        "Zweibrücken, Kreisfreie Stadt",
+        "Südwestpfalz"
+      ]
+    },
+    {
+      "key": "birkenfeld",
+      "name": "Birkenfeld",
+      "owner": "",
+      "districts": [
+        "Birkenfeld"
+      ],
+      "territory_controls": [
+        {
+          "key": "birkenfeld",
+          "name": "Birkenfeld",
+          "owner": "old",
+          "lon": 7.169,
+          "lat": 49.649
+        },
+        {
+          "key": "idar",
+          "name": "Idar",
+          "owner": "pru",
+          "lon": 7.306,
+          "lat": 49.704
+        },
+        {
+          "key": "baumholder",
+          "name": "Baumholder",
+          "owner": "pru",
+          "lon": 7.334,
+          "lat": 49.614
+        }
+      ]
+    }
+  ]
+}

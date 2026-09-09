@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "reference_url": "https://vic3.paradoxwikis.com/Victoria_3_Wiki",
+  "reference_image": "user-supplied Countries.png and read-only V3 1836 state-owner review",
+  "replaces_source_id": "DEU-1579",
+  "accuracy": "Independent district and geographic-control reconstruction of V3 opening polities; complete ownership, approximate fine boundaries.",
+  "locations": [
+    {
+      "key": "flensburg",
+      "name": "Flensburg",
+      "owner": "sch",
+      "districts": [
+        "Flensburg, Kreisfreie Stadt",
+        "Schleswig-Flensburg"
+      ]
+    },
+    {
+      "key": "kiel",
+      "name": "Kiel",
+      "owner": "hol",
+      "districts": [
+        "Kiel, Kreisfreie Stadt",
+        "Plön"
+      ]
+    },
+    {
+      "key": "segeberg",
+      "name": "Segeberg",
+      "owner": "hol",
+      "districts": [
+        "Neumünster, Kreisfreie Stadt",
+        "Segeberg"
+      ]
+    },
+    {
+      "key": "dithmarschen",
+      "name": "Dithmarschen",
+      "owner": "hol",
+      "districts": [
+        "Dithmarschen"
+      ]
+    },
+    {
+      "key": "herzogtum_lauenburg",
+      "name": "Herzogtum Lauenburg",
+      "owner": "hol",
+      "districts": [
+        "Herzogtum Lauenburg"
+      ]
+    },
+    {
+      "key": "lubeck",
+      "name": "Lübeck",
+      "owner": "lub",
+      "districts": [
+        "Lübeck, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "nordfriesland",
+      "name": "Nordfriesland",
+      "owner": "sch",
+      "districts": [
+        "Nordfriesland"
+      ]
+    },
+    {
+      "key": "ostholstein",
+      "name": "Ostholstein",
+      "owner": "hol",
+      "districts": [
+        "Ostholstein"
+      ]
+    },
+    {
+      "key": "pinneberg",
+      "name": "Pinneberg",
+      "owner": "hol",
+      "districts": [
+        "Pinneberg"
+      ]
+    },
+    {
+      "key": "rendsburg_eckernforde",
+      "name": "Rendsburg-Eckernförde",
+      "owner": "hol",
+      "districts": [
+        "Rendsburg-Eckernförde"
+      ],
+      "territory_controls": [
+        {
+          "key": "eckernfoerde",
+          "name": "Eckernfoerde",
+          "owner": "sch",
+          "lon": 9.84,
+          "lat": 54.47
+        },
+        {
+          "key": "rendsburg",
+          "name": "Rendsburg",
+          "owner": "hol",
+          "lon": 9.66,
+          "lat": 54.3
+        }
+      ]
+    },
+    {
+      "key": "steinburg",
+      "name": "Steinburg",
+      "owner": "hol",
+      "districts": [
+        "Steinburg"
+      ]
+    },
+    {
+      "key": "stormarn",
+      "name": "Stormarn",
+      "owner": "hol",
+      "districts": [
+        "Stormarn"
+      ]
+    }
+  ]
+}

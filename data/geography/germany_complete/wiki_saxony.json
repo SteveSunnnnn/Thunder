@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "reference_url": "https://vic3.paradoxwikis.com/Victoria_3_Wiki",
+  "reference_image": "user-supplied Countries.png and read-only V3 1836 state-owner review",
+  "replaces_source_id": "DEU-1601",
+  "accuracy": "Independent district and geographic-control reconstruction of V3 opening polities; complete ownership, approximate fine boundaries.",
+  "locations": [
+    {
+      "key": "leipzig",
+      "name": "Leipzig",
+      "owner": "sax",
+      "districts": [
+        "Leipzig",
+        "Leipzig, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "bautzen",
+      "name": "Bautzen",
+      "owner": "sax",
+      "districts": [
+        "Bautzen"
+      ]
+    },
+    {
+      "key": "chemnitz",
+      "name": "Chemnitz",
+      "owner": "sax",
+      "districts": [
+        "Chemnitz, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "dresden",
+      "name": "Dresden",
+      "owner": "sax",
+      "districts": [
+        "Dresden, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "erzgebirgskreis",
+      "name": "Erzgebirgskreis",
+      "owner": "sax",
+      "districts": [
+        "Erzgebirgskreis"
+      ]
+    },
+    {
+      "key": "gorlitz",
+      "name": "Görlitz",
+      "owner": "sax",
+      "districts": [
+        "Görlitz"
+      ],
+      "territory_controls": [
+        {
+          "key": "goerlitz",
+          "name": "Goerlitz",
+          "owner": "pru",
+          "lon": 14.987,
+          "lat": 51.155
+        },
+        {
+          "key": "zittau",
+          "name": "Zittau",
+          "owner": "sax",
+          "lon": 14.806,
+          "lat": 50.899
+        }
+      ]
+    },
+    {
+      "key": "meien",
+      "name": "Meißen",
+      "owner": "sax",
+      "districts": [
+        "Meißen"
+      ]
+    },
+    {
+      "key": "mittelsachsen",
+      "name": "Mittelsachsen",
+      "owner": "sax",
+      "districts": [
+        "Mittelsachsen"
+      ]
+    },
+    {
+      "key": "nordsachsen",
+      "name": "Nordsachsen",
+      "owner": "pru",
+      "districts": [
+        "Nordsachsen"
+      ]
+    },
+    {
+      "key": "sachsische_schweiz_osterzgebirge",
+      "name": "Sächsische Schweiz-Osterzgebirge",
+      "owner": "sax",
+      "districts": [
+        "Sächsische Schweiz-Osterzgebirge"
+      ]
+    },
+    {
+      "key": "vogtlandkreis",
+      "name": "Vogtlandkreis",
+      "owner": "sax",
+      "districts": [
+        "Vogtlandkreis"
+      ]
+    },
+    {
+      "key": "zwickau",
+      "name": "Zwickau",
+      "owner": "sax",
+      "districts": [
+        "Zwickau"
+      ]
+    }
+  ]
+}

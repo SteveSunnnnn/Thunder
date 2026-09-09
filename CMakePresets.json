@@ -1,0 +1,75 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 25,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "dev-headless",
+      "displayName": "Thunder Dev Headless",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/dev-headless",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "release-headless",
+      "displayName": "Thunder Release Headless QA",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/release-headless",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "dev-desktop",
+      "displayName": "Thunder Dev Vulkan",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/dev-desktop",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "THUNDER_BUILD_VULKAN": "ON"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "dev-headless",
+      "configurePreset": "dev-headless"
+    },
+    {
+      "name": "release-headless",
+      "configurePreset": "release-headless"
+    },
+    {
+      "name": "dev-desktop",
+      "configurePreset": "dev-desktop"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "dev-headless",
+      "configurePreset": "dev-headless",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "release-headless",
+      "configurePreset": "release-headless",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "dev-desktop",
+      "configurePreset": "dev-desktop",
+      "output": {
+        "outputOnFailure": true
+      }
+    }
+  ]
+}

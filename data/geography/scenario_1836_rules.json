@@ -1,0 +1,1227 @@
+{
+  "schema_version": 1,
+  "scenario_year": 1836,
+  "reference_scopes": {
+    "STATE_FORMOSA": ["TWN"],
+    "STATE_SANTA_CRUZ": ["BOL"],
+    "STATE_MARYLAND": ["USA"],
+    "STATE_MIDLANDS": ["GBR"],
+    "STATE_BENIN": ["NGA"]
+  },
+  "status": "v3_reference_reauthored_partial",
+  "reference": {
+    "title": "Victoria 3 installed 1836 state setup",
+    "build_id": "25081502",
+    "mode": "read_only_factual_review",
+    "geometry_source": "Natural Earth public domain"
+  },
+  "territory_owners": {
+    "OMN": "oma",
+    "FJI": "fji",
+    "TON": "tng",
+    "NRU": "nru",
+    "GBR": "gbr",
+    "IRL": "gbr",
+    "FRA": "fra",
+    "ESP": "spa",
+    "PRT": "por",
+    "NLD": "net",
+    "BEL": "bel",
+    "LUX": "lux",
+    "CHE": "swi",
+    "AUT": "aus",
+    "CZE": "aus",
+    "SVN": "aus",
+    "HUN": "hun",
+    "SVK": "hun",
+    "HRV": "cro",
+    "SWE": "swe",
+    "NOR": "nor",
+    "DNK": "den",
+    "ISL": "den",
+    "GRL": "den",
+    "FRO": "den",
+    "FIN": "fin",
+    "ALD": "fin",
+    "EST": "ubd",
+    "LVA": "ubd",
+    "LTU": "rus",
+    "RUS": "rus",
+    "BLR": "rus",
+    "UKR": "rus",
+    "POL": "rus",
+    "ARM": "rus",
+    "AZE": "rus",
+    "GEO": "rus",
+    "MDA": "rus",
+    "TUR": "tur",
+    "BGR": "tur",
+    "ALB": "tur",
+    "BIH": "tur",
+    "KOS": "tur",
+    "MKD": "tur",
+    "IRQ": "tur",
+    "CYP": "tur",
+    "SRB": "ser",
+    "MNE": "mon",
+    "EGY": "egy",
+    "SYR": "egy",
+    "LBN": "egy",
+    "JOR": "egy",
+    "ISR": "egy",
+    "PSX": "egy",
+    "TUN": "tun",
+    "MAR": "mor",
+    "IRN": "per",
+    "CHN": "chi",
+    "MNG": "chi",
+    "TWN": "chi",
+    "HKG": "chi",
+    "MAC": "por",
+    "KOR": "kor",
+    "PRK": "kor",
+    "JPN": "jap",
+    "NPL": "nep",
+    "BTN": "bhu",
+    "BGD": "bic",
+    "SGP": "gbr",
+    "BRN": "bru",
+    "PHL": "phi",
+    "THA": "sia",
+    "MEX": "mex",
+    "USA": "usa",
+    "COL": "clm",
+    "PAN": "clm",
+    "VEN": "vnz",
+    "ECU": "ecu",
+    "BOL": "bol",
+    "BRA": "brz",
+    "URY": "uru",
+    "PRY": "prg",
+    "GTM": "uca",
+    "HND": "uca",
+    "NIC": "uca",
+    "SLV": "uca",
+    "CRI": "uca",
+    "HTI": "hai",
+    "DOM": "hai",
+    "CUB": "spa",
+    "PRI": "spa",
+    "JAM": "gbr",
+    "GUY": "gbr",
+    "SUR": "net",
+    "BMU": "gbr",
+    "FLK": "gbr",
+    "CPV": "por",
+    "MLT": "gbr",
+    "GIB": "gbr",
+    "VAT": "pap"
+  },
+  "rules": [
+    {"territory": "AFG", "names": ["Herat"], "owner": "her", "v3_state": "STATE_HERAT", "accuracy": "regional approximation of the single-owner V3 state"},
+    {"territory": "AFG", "names": ["Kandahar"], "owner": "kan", "v3_state": "STATE_KANDAHAR", "accuracy": "regional approximation of the single-owner V3 state"},
+    {"territory": "ARG", "names": ["La Pampa"], "owner": "arg", "v3_state": "STATE_LA_PAMPA", "accuracy": "regional approximation"},
+    {"territory": "ARG", "names": ["Tucumán"], "owner": "arg", "v3_state": "STATE_TUCUMAN", "accuracy": "regional approximation"},
+    {"territory": "ARG", "names": ["Corrientes"], "owner": "arg", "v3_state": "STATE_CORRIENTES", "accuracy": "regional approximation"},
+    {"territory": "CHL", "names": ["Tarapacá"], "owner": "spu", "v3_state": "STATE_TARAPACA", "accuracy": "regional approximation"},
+    {"territory": "CHL", "names": ["Antofagasta"], "owner": "bol", "v3_state": "STATE_ANTOFAGASTA", "accuracy": "regional approximation"},
+    {"territory": "CHL", "names": ["Santiago"], "owner": "chl", "v3_state": "STATE_SANTIAGO", "accuracy": "regional approximation"},
+    {"territory": "CHL", "names": ["Los Ríos"], "owner": "chl", "v3_state": "STATE_LOS_RIOS", "accuracy": "regional approximation"},
+    {"territory": "KAZ", "names": ["Aktobe"], "owner": "kzh", "v3_state": "STATE_AKTOBE", "accuracy": "regional approximation"},
+    {"territory": "PER", "names": ["Arequipa"], "owner": "spu", "v3_state": "STATE_AREQUIPA", "accuracy": "regional approximation"},
+    {"territory": "PER", "names": ["Cajamarca"], "owner": "npu", "v3_state": "STATE_CAJAMARCA", "accuracy": "regional approximation"},
+    {"territory": "PER", "names": ["Lima"], "owner": "npu", "v3_state": "STATE_LIMA", "accuracy": "regional approximation"},
+    {"territory": "SDN", "names": ["Blue Nile"], "owner": "egy", "v3_state": "STATE_BLUE_NILE", "accuracy": "regional approximation"},
+    {"territory": "UZB", "names": ["Fergana"], "owner": "kok", "v3_state": "STATE_FERGANA", "accuracy": "regional approximation"},
+    {
+      "territory": "CHN",
+      "names": [
+        "Tibet"
+      ],
+      "owner": "tib"
+    },
+    {
+      "territory": "RUS",
+      "names": [
+        "Amur",
+        "Jewish",
+        "Primorsky Krai",
+        "Tuva Republic"
+      ],
+      "owner": "chi"
+    },
+    {
+      "territory": "RUS",
+      "names": [
+        "Khabarovsk Krai",
+        "Sakhalin"
+      ],
+      "owner": "",
+      "reason": "Mixed historical regions: require independent geographic split; no blanket Qing/Russian assignment"
+    },
+    {
+      "territory": "RUS",
+      "names": [
+        "Kaliningrad"
+      ],
+      "owner": "pru"
+    },
+    {
+      "territory": "JPN",
+      "names": [
+        "Okinawa Prefecture"
+      ],
+      "owner": "ryu"
+    },
+    {
+      "territory": "JPN",
+      "names": [
+        "Hokkaidō"
+      ],
+      "owner": "",
+      "reason": "Ezo and Japan require separate geometry"
+    },
+    {
+      "territory": "FRA",
+      "names": [
+        "Savoie",
+        "Haute-Savoie"
+      ],
+      "owner": "sar"
+    },
+    {
+      "territory": "FRA",
+      "names": [
+        "Alpes-Maritimes"
+      ],
+      "owner": "",
+      "reason": "Nice is Sardinian; Grasse remains French. Split along independently sourced Var boundary"
+    },
+    {
+      "territory": "ITA",
+      "regions": [
+        "Piemonte",
+        "Valle d'Aosta",
+        "Liguria",
+        "Sardegna"
+      ],
+      "owner": "sar"
+    },
+    {
+      "territory": "ITA",
+      "regions": [
+        "Lombardia",
+        "Veneto",
+        "Trentino-Alto Adige",
+        "Friuli-Venezia Giulia"
+      ],
+      "owner": "aus"
+    },
+    {
+      "territory": "ITA",
+      "regions": [
+        "Lazio",
+        "Umbria",
+        "Marche"
+      ],
+      "owner": "pap"
+    },
+    {
+      "territory": "ITA",
+      "regions": [
+        "Toscana"
+      ],
+      "owner": "tus"
+    },
+    {
+      "territory": "ITA",
+      "regions": [
+        "Campania",
+        "Abruzzo",
+        "Molise",
+        "Puglia",
+        "Basilicata",
+        "Calabria",
+        "Sicilia"
+      ],
+      "owner": "sic"
+    },
+    {
+      "territory": "ITA",
+      "names": [
+        "Bologna",
+        "Ferrara",
+        "Ravenna",
+        "Forlì-Cesena",
+        "Rimini"
+      ],
+      "owner": "pap"
+    },
+    {
+      "territory": "ITA",
+      "names": [
+        "Parma",
+        "Piacenza"
+      ],
+      "owner": "par"
+    },
+    {
+      "territory": "ITA",
+      "names": [
+        "Modena",
+        "Reggio Emilia",
+        "Massa-Carrara"
+      ],
+      "owner": "mod"
+    },
+    {
+      "territory": "ITA",
+      "names": [
+        "Lucca"
+      ],
+      "owner": "luc"
+    },
+    {
+      "territory": "DEU",
+      "names": [
+        "Berlin",
+        "Brandenburg",
+        "North Rhine-Westphalia",
+        "Saarland"
+      ],
+      "owner": "pru"
+    },
+    {
+      "territory": "DEU",
+      "names": [
+        "Bavaria"
+      ],
+      "owner": "bav"
+    },
+    {
+      "territory": "DEU",
+      "names": [
+        "Hamburg"
+      ],
+      "owner": "ham"
+    },
+    {
+      "territory": "DEU",
+      "names": [
+        "Free Hanseatic Bremen"
+      ],
+      "owner": "bre"
+    },
+    {
+      "territory": "DEU",
+      "names": [
+        "Saxony"
+      ],
+      "owner": "sax"
+    },
+    {
+      "territory": "DEU",
+      "names": [
+        "Lower Saxony"
+      ],
+      "owner": "han",
+      "accuracy": "regional approximation; Oldenburg and Brunswick need splits"
+    },
+    {
+      "territory": "POL",
+      "names": [
+        "Warmian-Masurian Voivodeship",
+        "Pomeranian Voivodeship",
+        "West Pomeranian Voivodeship",
+        "Lower Silesian Voivodeship",
+        "Lubusz Voivodeship",
+        "Greater Poland Voivodeship",
+        "Opole Voivodeship",
+        "Silesian Voivodeship"
+      ],
+      "owner": "pru"
+    },
+    {
+      "territory": "POL",
+      "names": [
+        "Lesser Poland Voivodeship",
+        "Podkarpackie Voivodeship"
+      ],
+      "owner": "aus",
+      "accuracy": "regional approximation; Krakow needs separate geometry"
+    },
+    {
+      "territory": "UKR",
+      "names": [
+        "Lviv",
+        "Ivano-Frankivsk",
+        "Ternopil",
+        "Chernivtsi"
+      ],
+      "owner": "aus"
+    },
+    {
+      "territory": "UKR",
+      "names": [
+        "Zakarpattia"
+      ],
+      "owner": "hun"
+    },
+    {
+      "territory": "GRC",
+      "names": [
+        "Attica",
+        "Peloponnese",
+        "West Greece",
+        "Central Greece",
+        "South Aegean"
+      ],
+      "owner": "gre"
+    },
+    {
+      "territory": "GRC",
+      "names": [
+        "West Macedonia",
+        "Thessalia",
+        "Epirus",
+        "Centre Macedonia",
+        "Mount Athos",
+        "East Macedonia and Thrace",
+        "North Aegean"
+      ],
+      "owner": "tur"
+    },
+    {
+      "territory": "GRC",
+      "names": [
+        "Crete"
+      ],
+      "owner": "egy"
+    },
+    {
+      "territory": "GRC",
+      "names": [
+        "Ionian Islands"
+      ],
+      "owner": "ion"
+    },
+    {
+      "territory": "CAN",
+      "names": [
+        "Ontario"
+      ],
+      "owner": "ont",
+      "accuracy": "southern colony/HBC boundary requires split"
+    },
+    {
+      "territory": "ROU",
+      "names": ["Argeș", "Brăila", "Buzău", "Călărași", "Dâmbovița", "Dolj", "Giurgiu", "Gorj", "Ialomița", "Ilfov", "Mehedinți", "Olt", "Prahova", "Teleorman", "Vâlcea", "Bucharest"],
+      "owner": "wal",
+      "v3_state": "STATE_WALLACHIA",
+      "accuracy": "county approximation of the referenced historical region; edge cuts pending"
+    },
+    {
+      "territory": "ROU",
+      "names": ["Bacău", "Botoșani", "Galați", "Iași", "Neamț", "Vaslui", "Vrancea"],
+      "owner": "mol",
+      "v3_state": "STATE_MOLDAVIA",
+      "accuracy": "county approximation; the mixed Bukovina/Suceava border remains unassigned"
+    },
+    {
+      "territory": "ROU",
+      "names": ["Alba", "Bistrița-Năsăud", "Brașov", "Cluj", "Covasna", "Harghita", "Hunedoara", "Mureș", "Sibiu"],
+      "owner": "trs",
+      "v3_state": "STATE_NORTHERN_TRANSYLVANIA;STATE_SOUTHERN_TRANSYLVANIA",
+      "accuracy": "regional approximation; exact historic jurisdiction cuts pending"
+    },
+    {
+      "territory": "ROU",
+      "names": ["Arad", "Bihor", "Caraș-Severin", "Maramureș", "Satu Mare", "Timiș"],
+      "owner": "hun",
+      "v3_state": "STATE_BANAT;STATE_RUTHENIA",
+      "accuracy": "regional approximation; mixed Partium/Salaj remains unassigned"
+    },
+    {
+      "territory": "ROU",
+      "names": ["Constanța"],
+      "owner": "tur",
+      "v3_state": "STATE_DOBRUDJA",
+      "accuracy": "southern region; mixed northern Tulcea remains unassigned"
+    },
+    {
+      "territory": "ESP",
+      "regions": ["País Vasco", "Foral de Navarra"],
+      "owner": "spc",
+      "v3_state": "STATE_BASQUE_COUNTRY",
+      "accuracy": "regional approximation; Aragon/Catalonia civil-war boundaries require masks"
+    },
+    {
+      "territory": "CAN",
+      "names": [
+        "Quebec"
+      ],
+      "owner": "que",
+      "accuracy": "southern colony/HBC boundary requires split"
+    },
+    {
+      "territory": "CAN",
+      "names": [
+        "New Brunswick"
+      ],
+      "owner": "nbs"
+    },
+    {
+      "territory": "CAN",
+      "names": [
+        "Nova Scotia",
+        "Prince Edward Island"
+      ],
+      "owner": "nvs"
+    },
+    {
+      "territory": "CAN",
+      "names": [
+        "Newfoundland and Labrador"
+      ],
+      "owner": "gbr"
+    },
+    {
+      "territory": "CAN",
+      "names": [
+        "Manitoba",
+        "Saskatchewan",
+        "Alberta",
+        "British Columbia",
+        "Yukon",
+        "Nunavut",
+        "Northwest Territories"
+      ],
+      "owner": "hbc",
+      "accuracy": "company/indigenous regions need historical splits"
+    },
+    {
+      "territory": "USA",
+      "names": [
+        "California",
+        "Nevada",
+        "Utah",
+        "Arizona",
+        "New Mexico"
+      ],
+      "owner": "mex",
+      "accuracy": "indigenous interiors need historical splits"
+    },
+    {
+      "territory": "USA",
+      "names": [
+        "Texas"
+      ],
+      "owner": "tex",
+      "accuracy": "western Mexico/Comanche boundaries need splits"
+    },
+    {
+      "territory": "USA",
+      "names": [
+        "Oregon",
+        "Washington"
+      ],
+      "owner": "org"
+    },
+    {
+      "territory": "USA",
+      "names": [
+        "Hawaii"
+      ],
+      "owner": "haw"
+    },
+    {
+      "territory": "USA",
+      "names": [
+        "Alaska"
+      ],
+      "owner": "alk",
+      "accuracy": "interior indigenous areas require split"
+    },
+    {
+      "territory": "USA",
+      "names": [
+        "Idaho",
+        "Colorado",
+        "Wyoming",
+        "Montana",
+        "North Dakota",
+        "South Dakota",
+        "Nebraska",
+        "Kansas",
+        "Oklahoma"
+      ],
+      "owner": "",
+      "reason": "mixed sovereign/indigenous territories; no modern US fallback"
+    },
+    {
+      "territory": "AUS",
+      "names": [
+        "New South Wales",
+        "Victoria",
+        "Australian Capital Territory",
+        "Jervis Bay Territory",
+        "Lord Howe Island"
+      ],
+      "owner": "nsw",
+      "accuracy": "settled coastal extent only requires finer boundary"
+    },
+    {
+      "territory": "AUS",
+      "names": [
+        "Tasmania"
+      ],
+      "owner": "tas"
+    },
+    {
+      "territory": "AUS",
+      "names": [
+        "South Australia"
+      ],
+      "owner": "sas",
+      "accuracy": "interior indigenous extent needs split"
+    },
+    {
+      "territory": "AUS",
+      "names": [
+        "Western Australia"
+      ],
+      "owner": "was",
+      "accuracy": "interior indigenous extent needs split"
+    },
+    {
+      "territory": "IND",
+      "names": [
+        "West Bengal",
+        "Bihar",
+        "Jharkhand",
+        "Tamil Nadu",
+        "Andhra Pradesh",
+        "Odisha"
+      ],
+      "owner": "bic",
+      "accuracy": "enclaves and local states need independent masks"
+    },
+    {
+      "territory": "IND",
+      "names": [
+        "Telangana"
+      ],
+      "owner": "hyd"
+    },
+    {
+      "territory": "IND",
+      "names": [
+        "Punjab"
+      ],
+      "owner": "pan"
+    },
+    {
+      "territory": "IND",
+      "names": [
+        "Goa"
+      ],
+      "owner": "por"
+    },
+    {
+      "territory": "IND",
+      "names": [
+        "Puducherry"
+      ],
+      "owner": "fra"
+    },
+    {
+      "territory": "IND",
+      "names": [
+        "Sikkim"
+      ],
+      "owner": "sik"
+    },
+    {
+      "territory": "IND",
+      "names": [
+        "Manipur"
+      ],
+      "owner": "mnp"
+    },
+    {
+      "territory": "IND",
+      "names": [
+        "Tripura"
+      ],
+      "owner": "tip"
+    },
+    {
+      "territory": "PAK",
+      "names": [
+        "Punjab",
+        "Islamabad Capital Territory"
+      ],
+      "owner": "pan"
+    },
+    {
+      "territory": "PAK",
+      "names": [
+        "Sindh"
+      ],
+      "owner": "sin"
+    },
+    {
+      "territory": "SAU",
+      "names": [
+        "Riyadh",
+        "Al-Qassim",
+        "Eastern"
+      ],
+      "owner": "nej"
+    },
+    {
+      "territory": "SAU",
+      "names": [
+        "Ha'il"
+      ],
+      "owner": "jab"
+    },
+    {
+      "territory": "SAU",
+      "names": [
+        "Makkah",
+        "Al Madinah",
+        "Tabuk"
+      ],
+      "owner": "hdj"
+    },
+    {
+      "territory": "IDN",
+      "names": [
+        "West Java",
+        "Central Java",
+        "East Java",
+        "Jakarta",
+        "Banten",
+        "South Sumatra",
+        "Lampung",
+        "Bengkulu"
+      ],
+      "owner": "dei"
+    },
+    {
+      "territory": "IDN",
+      "names": [
+        "Aceh"
+      ],
+      "owner": "ace"
+    },
+    {
+      "territory": "IDN",
+      "names": [
+        "Bali"
+      ],
+      "owner": "bal"
+    },
+    {
+      "territory": "BRA",
+      "names": [
+        "Acre"
+      ],
+      "owner": "bol"
+    },
+    {
+      "territory": "BRA",
+      "names": [
+        "Pará"
+      ],
+      "owner": "pra"
+    },
+    {
+      "territory": "BRA",
+      "names": [
+        "Rio Grande do Sul"
+      ],
+      "owner": "pni"
+    }
+  ],
+  "countries": {
+    "anh": {"name":"Anhalt", "color":[151,174,113]},
+    "mec": {"name":"Mecklenburg-Schwerin", "color":[180,149,91]},
+    "mst": {"name":"Mecklenburg-Strelitz", "color":[199,164,115]},
+    "hol": {"name":"Holstein", "color":[149,180,177]},
+    "sch": {"name":"Schleswig", "color":[182,163,187]},
+    "lub": {"name":"Lübeck", "color":[170,100,119]},
+    "mei": {"name":"Saxe-Meiningen", "color":[161,173,103]},
+    "wei": {"name":"Saxe-Weimar", "color":[180,131,130]},
+    "cob": {"name":"Saxe-Coburg-Gotha", "color":[132,158,177]},
+    "scw": {"name":"Schwarzburg", "color":[146,140,181]},
+    "wld": {"name":"Waldeck", "color":[190,161,107]},
+    "scm": {"name":"Schaumburg-Lippe", "color":[169,140,98]},
+    "lip": {"name":"Lippe", "color":[171,185,119]},
+    "old": {"name": "Oldenburg", "color": [195, 160, 89]},
+    "bra": {"name": "Brunswick", "color": [161, 111, 77]},
+    "frm": {"name": "Frankfurt", "color": [180, 86, 90]},
+    "hes": {"name": "Hesse-Darmstadt", "color": [167, 152, 204]},
+    "hek": {"name": "Hesse-Kassel", "color": [104, 163, 150]},
+    "nas": {"name": "Nassau", "color": [113, 155, 201]},
+    "bad": {"name": "Baden", "color": [210, 187, 101]},
+    "wur": {"name": "Württemberg", "color": [156, 115, 105]},
+    "hoh": {"name": "Hohenzollern", "color": [130, 147, 151]},
+    "her": {"name": "HERAT"},
+    "kan": {"name": "KANDAHAR"},
+    "arg": {"name": "ARGENTINA"},
+    "chl": {"name": "CHILE"},
+    "spu": {"name": "SOUTH PERU"},
+    "npu": {"name": "NORTH PERU"},
+    "kzh": {"name": "JUNIOR ZHUZ"},
+    "kok": {"name": "KOKAND"},
+    "oma": {"name": "OMAN"},
+    "fji": {"name": "FIJI"},
+    "tng": {"name": "TONGA"},
+    "nru": {"name": "NAURU"},
+    "wal": {"name": "WALLACHIA", "color": [184, 129, 117]},
+    "mol": {"name": "MOLDAVIA", "color": [165, 162, 136]},
+    "trs": {"name": "TRANSYLVANIA", "color": [192, 167, 160]},
+    "spc": {"name": "CARLIST SPAIN", "color": [192, 149, 101]},
+    "chi": {
+      "name": "QING",
+      "color": [
+        195,
+        170,
+        72
+      ]
+    },
+    "rus": {
+      "name": "RUSSIA",
+      "color": [
+        112,
+        151,
+        72
+      ]
+    },
+    "gbr": {
+      "name": "GREAT BRITAIN",
+      "label_territory": "GBR",
+      "color": [
+        190,
+        91,
+        111
+      ]
+    },
+    "fra": {
+      "name": "FRANCE",
+      "color": [
+        91,
+        120,
+        187
+      ]
+    },
+    "pru": {
+      "name": "PRUSSIA",
+      "color": [
+        72,
+        114,
+        139
+      ]
+    },
+    "aus": {
+      "name": "AUSTRIA",
+      "color": [
+        214,
+        213,
+        200
+      ]
+    },
+    "spa": {
+      "name": "SPAIN",
+      "color": [
+        218,
+        188,
+        79
+      ]
+    },
+    "por": {
+      "name": "PORTUGAL",
+      "color": [
+        128,
+        161,
+        180
+      ]
+    },
+    "swe": {
+      "name": "SWEDEN",
+      "color": [
+        126,
+        164,
+        194
+      ]
+    },
+    "nor": {
+      "name": "NORWAY",
+      "color": [
+        148,
+        173,
+        191
+      ]
+    },
+    "den": {
+      "name": "DENMARK",
+      "color": [
+        179,
+        98,
+        84
+      ],
+      "label_territory": "DNK"
+    },
+    "fin": {
+      "name": "FINLAND",
+      "color": [
+        140,
+        184,
+        87
+      ]
+    },
+    "tur": {
+      "name": "OTTOMAN EMPIRE",
+      "color": [
+        136,
+        168,
+        130
+      ]
+    },
+    "egy": {
+      "name": "EGYPT",
+      "color": [
+        194,
+        164,
+        97
+      ]
+    },
+    "per": {
+      "name": "PERSIA",
+      "color": [
+        173,
+        160,
+        109
+      ]
+    },
+    "tib": {
+      "name": "TIBET",
+      "color": [
+        168,
+        113,
+        91
+      ]
+    },
+    "jap": {
+      "name": "JAPAN",
+      "color": [
+        181,
+        110,
+        102
+      ]
+    },
+    "kor": {
+      "name": "JOSEON",
+      "color": [
+        154,
+        171,
+        121
+      ]
+    },
+    "bic": {
+      "name": "EAST INDIA COMPANY",
+      "color": [
+        181,
+        128,
+        119
+      ]
+    },
+    "dei": {
+      "name": "DUTCH EAST INDIES",
+      "color": [
+        182,
+        148,
+        102
+      ]
+    },
+    "usa": {
+      "name": "UNITED STATES",
+      "color": [
+        150,
+        166,
+        174
+      ]
+    },
+    "mex": {
+      "name": "MEXICO",
+      "color": [
+        118,
+        158,
+        116
+      ]
+    },
+    "brz": {
+      "name": "BRAZIL",
+      "color": [
+        151,
+        181,
+        113
+      ]
+    },
+    "hbc": {
+      "name": "HUDSON BAY COMPANY",
+      "color": [
+        161,
+        145,
+        127
+      ]
+    },
+    "ont": {
+      "name": "UPPER CANADA",
+      "color": [
+        191,
+        130,
+        135
+      ]
+    },
+    "que": {
+      "name": "LOWER CANADA",
+      "color": [
+        176,
+        119,
+        137
+      ]
+    },
+    "nsw": {
+      "name": "NEW SOUTH WALES",
+      "color": [
+        191,
+        140,
+        143
+      ]
+    },
+    "was": {
+      "name": "SWAN RIVER",
+      "color": [
+        177,
+        130,
+        140
+      ]
+    },
+    "sar": {
+      "name": "SARDINIA PIEDMONT",
+      "color": [
+        139,
+        172,
+        155
+      ]
+    },
+    "sic": {
+      "name": "TWO SICILIES",
+      "color": [
+        132,
+        162,
+        147
+      ]
+    },
+    "pap": {
+      "name": "PAPAL STATES",
+      "color": [
+        215,
+        205,
+        165
+      ]
+    },
+    "bav": {
+      "name": "BAVARIA",
+      "color": [
+        159,
+        187,
+        202
+      ]
+    },
+    "hun": {
+      "name": "HUNGARY",
+      "color": [
+        194,
+        148,
+        136
+      ]
+    },
+    "cro": {
+      "name": "CROATIA",
+      "color": [
+        168,
+        153,
+        163
+      ]
+    },
+    "net": {
+      "name": "NETHERLANDS",
+      "label_territory": "NLD"
+    },
+    "bel": {
+      "name": "BELGIUM"
+    },
+    "lux": {
+      "name": "LUXEMBOURG"
+    },
+    "swi": {
+      "name": "SWITZERLAND"
+    },
+    "ubd": {
+      "name": "BALTIC GOVERNORATES"
+    },
+    "ser": {
+      "name": "SERBIA"
+    },
+    "mon": {
+      "name": "MONTENEGRO"
+    },
+    "tun": {
+      "name": "TUNIS"
+    },
+    "mor": {
+      "name": "MOROCCO"
+    },
+    "nep": {
+      "name": "NEPAL"
+    },
+    "bhu": {
+      "name": "BHUTAN"
+    },
+    "hyd": {
+      "name": "HYDERABAD"
+    },
+    "pan": {
+      "name": "SIKH EMPIRE"
+    },
+    "sik": {
+      "name": "SIKKIM"
+    },
+    "mnp": {
+      "name": "MANIPUR"
+    },
+    "tip": {
+      "name": "TRIPURA"
+    },
+    "sin": {
+      "name": "SINDH"
+    },
+    "phi": {
+      "name": "PHILIPPINES"
+    },
+    "sia": {
+      "name": "SIAM"
+    },
+    "clm": {
+      "name": "NEW GRANADA"
+    },
+    "vnz": {
+      "name": "VENEZUELA"
+    },
+    "ecu": {
+      "name": "ECUADOR"
+    },
+    "bol": {
+      "name": "BOLIVIA"
+    },
+    "uru": {
+      "name": "URUGUAY"
+    },
+    "prg": {
+      "name": "PARAGUAY"
+    },
+    "uca": {
+      "name": "CENTRAL AMERICA"
+    },
+    "hai": {
+      "name": "HAITI"
+    },
+    "nbs": {
+      "name": "NEW BRUNSWICK"
+    },
+    "nvs": {
+      "name": "NOVA SCOTIA"
+    },
+    "org": {
+      "name": "OREGON COUNTRY"
+    },
+    "tex": {
+      "name": "TEXAS"
+    },
+    "haw": {
+      "name": "HAWAII"
+    },
+    "alk": {
+      "name": "RUSSIAN AMERICA"
+    },
+    "tas": {
+      "name": "VAN DIEMEN LAND"
+    },
+    "sas": {
+      "name": "SOUTH AUSTRALIA"
+    },
+    "tus": {
+      "name": "TUSCANY"
+    },
+    "par": {
+      "name": "PARMA"
+    },
+    "mod": {
+      "name": "MODENA"
+    },
+    "luc": {
+      "name": "LUCCA"
+    },
+    "ham": {
+      "name": "HAMBURG"
+    },
+    "bre": {
+      "name": "BREMEN"
+    },
+    "sax": {
+      "name": "SAXONY"
+    },
+    "han": {
+      "name": "HANOVER",
+      "color": [194, 158, 181]
+    },
+    "gre": {
+      "name": "GREECE"
+    },
+    "ion": {
+      "name": "IONIAN ISLANDS"
+    },
+    "nej": {
+      "name": "NEJD"
+    },
+    "jab": {
+      "name": "JABAL SHAMMAR"
+    },
+    "hdj": {
+      "name": "HEJAZ"
+    },
+    "ace": {
+      "name": "ACEH"
+    },
+    "bal": {
+      "name": "BALI"
+    },
+    "pra": {
+      "name": "PARA"
+    },
+    "pni": {
+      "name": "RIO GRANDE"
+    },
+    "ryu": {
+      "name": "RYUKYU"
+    }
+  },
+  "known_geometry_gaps": [
+    "Mixed-owner modern administrative regions require 1836 masks before claiming exact borders.",
+    "Unreviewed regions remain unassigned; no data from Core is used."
+  ]
+}

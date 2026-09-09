@@ -1,0 +1,254 @@
+{
+  "schema_version": 1,
+  "reference_url": "https://vic3.paradoxwikis.com/Victoria_3_Wiki",
+  "reference_image": "user-supplied Countries.png; installed V3 factual review of Hesse",
+  "replaces_source_id": "DEU-1574",
+  "pending_state": "hesse_pending",
+  "accuracy": "Complete owner assignment with independently authored control-based approximations inside mixed districts. Exact historical border surveying remains a separate accuracy task.",
+  "locations": [
+    {
+      "key": "frankfurt",
+      "name": "Frankfurt",
+      "owner": "frm",
+      "districts": [
+        "Frankfurt am Main, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "darmstadt",
+      "name": "Darmstadt",
+      "owner": "hes",
+      "districts": [
+        "Darmstadt, Kreisfreie Stadt",
+        "Darmstadt-Dieburg"
+      ]
+    },
+    {
+      "key": "odenwald",
+      "name": "Odenwald",
+      "owner": "hes",
+      "districts": [
+        "Odenwaldkreis"
+      ]
+    },
+    {
+      "key": "bergstrasse",
+      "name": "Bergstraße",
+      "owner": "hes",
+      "districts": [
+        "Bergstraße"
+      ]
+    },
+    {
+      "key": "gross_gerau",
+      "name": "Groß-Gerau",
+      "owner": "hes",
+      "districts": [
+        "Groß-Gerau"
+      ]
+    },
+    {
+      "key": "offenbach",
+      "name": "Offenbach",
+      "owner": "hes",
+      "districts": [
+        "Offenbach am Main, Kreisfreie Stadt",
+        "Offenbach, Landkreis"
+      ]
+    },
+    {
+      "key": "giessen",
+      "name": "Gießen",
+      "owner": "hes",
+      "districts": [
+        "Gießen, Landkreis"
+      ]
+    },
+    {
+      "key": "vogelsberg",
+      "name": "Vogelsberg",
+      "owner": "hes",
+      "districts": [
+        "Vogelsbergkreis"
+      ]
+    },
+    {
+      "key": "wetterau",
+      "name": "Wetterau",
+      "owner": "hes",
+      "districts": [
+        "Wetteraukreis"
+      ]
+    },
+    {
+      "key": "kassel",
+      "name": "Kassel",
+      "owner": "hek",
+      "districts": [
+        "Kassel, Kreisfreie Stadt",
+        "Kassel, Landkreis"
+      ]
+    },
+    {
+      "key": "fulda",
+      "name": "Fulda",
+      "owner": "hek",
+      "districts": [
+        "Fulda"
+      ]
+    },
+    {
+      "key": "hersfeld",
+      "name": "Hersfeld",
+      "owner": "hek",
+      "districts": [
+        "Hersfeld-Rotenburg"
+      ]
+    },
+    {
+      "key": "werra_meissner",
+      "name": "Werra-Meißner",
+      "owner": "hek",
+      "districts": [
+        "Werra-Meißner-Kreis"
+      ]
+    },
+    {
+      "key": "schwalm_eder",
+      "name": "Schwalm-Eder",
+      "owner": "hek",
+      "districts": [
+        "Schwalm-Eder-Kreis"
+      ]
+    },
+    {
+      "key": "hanau",
+      "name": "Hanau",
+      "owner": "hek",
+      "districts": [
+        "Main-Kinzig-Kreis"
+      ]
+    },
+    {
+      "key": "wiesbaden",
+      "name": "Wiesbaden",
+      "owner": "nas",
+      "districts": [
+        "Wiesbaden, Kreisfreie Stadt",
+        "Rheingau-Taunus-Kreis"
+      ]
+    },
+    {
+      "key": "limburg",
+      "name": "Limburg-Weilburg",
+      "owner": "nas",
+      "districts": [
+        "Limburg-Weilburg"
+      ]
+    },
+    {
+      "key": "main_taunus",
+      "name": "Main-Taunus",
+      "owner": "nas",
+      "districts": [
+        "Main-Taunus-Kreis"
+      ]
+    },
+    {
+      "key": "hochtaunus",
+      "name": "Hochtaunus",
+      "owner": "",
+      "districts": [
+        "Hochtaunuskreis"
+      ],
+      "territory_controls": [
+        {
+          "key": "usingen",
+          "name": "Usingen",
+          "owner": "nas",
+          "lon": 8.535,
+          "lat": 50.335
+        },
+        {
+          "key": "homburg",
+          "name": "Homburg",
+          "owner": "hes",
+          "lon": 8.611,
+          "lat": 50.227
+        }
+      ]
+    },
+    {
+      "key": "lahn_dill",
+      "name": "Lahn-Dill",
+      "owner": "",
+      "districts": [
+        "Lahn-Dill-Kreis"
+      ],
+      "territory_controls": [
+        {
+          "key": "wetzlar",
+          "name": "Wetzlar",
+          "owner": "pru",
+          "lon": 8.504,
+          "lat": 50.555
+        },
+        {
+          "key": "dillenburg",
+          "name": "Dillenburg",
+          "owner": "nas",
+          "lon": 8.287,
+          "lat": 50.742
+        }
+      ]
+    },
+    {
+      "key": "marburg_biedenkopf",
+      "name": "Marburg-Biedenkopf",
+      "owner": "",
+      "districts": [
+        "Marburg-Biedenkopf"
+      ],
+      "territory_controls": [
+        {
+          "key": "marburg",
+          "name": "Marburg",
+          "owner": "hek",
+          "lon": 8.772,
+          "lat": 50.808
+        },
+        {
+          "key": "biedenkopf",
+          "name": "Biedenkopf",
+          "owner": "hes",
+          "lon": 8.525,
+          "lat": 50.913
+        }
+      ]
+    },
+    {
+      "key": "waldeck_frankenberg",
+      "name": "Waldeck-Frankenberg",
+      "owner": "",
+      "districts": [
+        "Waldeck-Frankenberg"
+      ],
+      "territory_controls": [
+        {
+          "key": "korbach",
+          "name": "Korbach",
+          "owner": "wld",
+          "lon": 8.875,
+          "lat": 51.273
+        },
+        {
+          "key": "frankenberg",
+          "name": "Frankenberg",
+          "owner": "hek",
+          "lon": 8.85,
+          "lat": 51.061
+        }
+      ]
+    }
+  ]
+}

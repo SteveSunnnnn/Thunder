@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "bkg_germany_districts_2021",
+      "file": "raw/germany_districts.geojson",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/DEU/ADM3/geoBoundaries-DEU-ADM3_simplified.geojson",
+      "license": "dl-de/by-2-0",
+      "license_url": "https://www.govdata.de/dl-de/by-2-0",
+      "attribution": "\u00a9 GeoBasis-DE / BKG (2021); supplied through geoBoundaries gbOpen",
+      "role": "modern_subdivision_geometry_only",
+      "metadata_url": "https://www.geoboundaries.org/api/current/gbOpen/DEU/ADM3/",
+      "provider_source_url": "gdz.bkg.bund.de/index.php/default/digitale-geodaten/verwaltungsgebiete/nuts-gebiete-1-250-000-stand-31-12-nuts250-31-12.html",
+      "sha256": "a711f65d1eafa075e24c9efe0b37af042567bea00e7b2b6d9e49d63f0a421ade",
+      "bytes": 6026657
+    }
+  ]
+}
