@@ -24,7 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Dependencies
-        run: sudo apt-get update && sudo apt-get install -y ninja-build libzstd-dev libxxhash-dev libvulkan-dev glslc libx11-dev libxcursor-dev libxi-dev libxrandr-dev libxinerama-dev libxxf86vm-dev libxss-dev libxtst-dev libwayland-dev libxkbcommon-dev libdrm-dev libgbm-dev && glslc --version
+        run: sudo apt-get update && sudo apt-get install -y ninja-build libzstd-dev libxxhash-dev libvulkan-dev glslc spirv-tools libx11-dev libxcursor-dev libxi-dev libxrandr-dev libxinerama-dev libxxf86vm-dev libxss-dev libxtst-dev libwayland-dev libxkbcommon-dev libdrm-dev libgbm-dev && glslc --version && spirv-val --version
       - name: Configure (Vulkan backend + tests)
         run: cmake -S . -B build-vulkan -G Ninja -DCMAKE_BUILD_TYPE=Release -DTHUNDER_BUILD_VULKAN=ON -DTHUNDER_WARNINGS_AS_ERRORS=OFF -DSDL_X11_XTEST=OFF
       - name: Build

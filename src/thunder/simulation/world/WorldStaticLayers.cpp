@@ -5,6 +5,10 @@
 #include <cmath>
 #include <stdexcept>
 
+#if defined(__GNUC__) && !defined(__clang__)
+#pragma GCC diagnostic ignored "-Wfree-nonheap-object"
+#endif
+
 namespace thunder {
 namespace {
 
