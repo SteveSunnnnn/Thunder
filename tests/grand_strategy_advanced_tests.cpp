@@ -275,6 +275,14 @@ int main() {
         assert(battle.phase_days_elapsed <= 3);
         assert(battle.attacker_manpower < 10000 || battle.defender_manpower < 10000);
 
+        // Test small-unit battle casualties (manpower < 1000 must inflict non-zero casualties)
+        BattleState small_battle;
+        small_battle.attacker_manpower = 500;
+        small_battle.defender_manpower = 500;
+        battle_sys.advance_battle_day(small_battle, 1.0f, 1.0f);
+        assert(small_battle.defender_manpower < 500);
+        assert(small_battle.attacker_manpower < 500);
+
         std::cout << "  [PASS] LogisticsNetwork convoy raiding and multi-phase battle tactics\n";
     }
 
@@ -283,6 +291,8 @@ int main() {
         LivingMapVfxSystem vfx;
         vfx.spawn_train(100.0f, 100.0f, 300.0f, 300.0f);
         vfx.spawn_ship(500.0f, 500.0f, 700.0f, 500.0f);
+        assert(vfx.train_count() == 1);
+        assert(vfx.ship_count() == 1);
 
         vfx.update(0.5f);
         assert(vfx.particle_count() > 0);
@@ -290,6 +300,15 @@ int main() {
         UiDrawList ui;
         vfx.render(ui);
         assert(ui.vertices().size() > 0);
+
+        // Advance simulation so train and ship reach destinations and despawn
+        vfx.update(25.0f);
+        assert(vfx.train_count() == 0);
+        assert(vfx.ship_count() == 0);
+
+        // Advance further so trailing particles expire
+        vfx.update(5.0f);
+        assert(vfx.particle_count() == 0);
 
         std::cout << "  [PASS] LivingMapVfxSystem trains, ships, and trailing particle wakes\n";
     }

@@ -23,7 +23,7 @@ std::uint32_t TerrainClipmap::triangles_per_patch(TerrainMeshLod lod) noexcept {
 }
 
 TerrainClipmap::TerrainClipmap(TerrainClipmapConfig config) : config_(config) {
-    if (config_.levels == 0u || config_.patches_per_side < 4u || (config_.patches_per_side % 2u) != 0u ||
+    if (config_.levels == 0u || config_.levels > 32u || config_.patches_per_side < 4u || (config_.patches_per_side % 2u) != 0u ||
         config_.base_patch_size_m <= 0.0 || config_.origin_snap_m <= 0.0) {
         throw std::invalid_argument("invalid terrain clipmap configuration");
     }

@@ -24,6 +24,9 @@ TacticCard BattlePhaseSystem::select_tactic(BattlePhase phase, bool is_attacker)
 void BattlePhaseSystem::advance_battle_day(BattleState& b, float attacker_supply, float defender_supply) {
     if (b.is_concluded) return;
 
+    attacker_supply = std::clamp(attacker_supply, 0.0f, 1.0f);
+    defender_supply = std::clamp(defender_supply, 0.0f, 1.0f);
+
     b.phase_days_elapsed++;
 
     // Select tactics if day 1 of new phase
@@ -34,18 +37,18 @@ void BattlePhaseSystem::advance_battle_day(BattleState& b, float attacker_supply
 
     // Apply daily casualties & morale impact modulated by logistics
     const float atk_base = static_cast<float>(b.attacker_tactic.casualty_inflict_ppm + 50'000);
-    const float atk_units = static_cast<float>(b.attacker_manpower / 1000);
+    const float atk_units = static_cast<float>(b.attacker_manpower) / 1000.0f;
     const std::int32_t atk_inflict = static_cast<std::int32_t>((atk_base * attacker_supply * atk_units) / 1000.0f);
 
     const float def_base = static_cast<float>(b.defender_tactic.casualty_inflict_ppm + 50'000);
-    const float def_units = static_cast<float>(b.defender_manpower / 1000);
+    const float def_units = static_cast<float>(b.defender_manpower) / 1000.0f;
     const std::int32_t def_inflict = static_cast<std::int32_t>((def_base * defender_supply * def_units) / 1000.0f);
 
     b.defender_manpower = std::max(0, b.defender_manpower - atk_inflict);
     b.attacker_manpower = std::max(0, b.attacker_manpower - def_inflict);
 
-    b.attacker_morale_ppm = std::max(0, b.attacker_morale_ppm - 40'000 - static_cast<std::int32_t>((1.0f - attacker_supply) * 100'000));
-    b.defender_morale_ppm = std::max(0, b.defender_morale_ppm - 35'000 - static_cast<std::int32_t>((1.0f - defender_supply) * 100'000));
+    b.attacker_morale_ppm = std::max(0, b.attacker_morale_ppm - 40'000 - static_cast<std::int32_t>((1.0f - attacker_supply) * 100'000.0f));
+    b.defender_morale_ppm = std::max(0, b.defender_morale_ppm - 35'000 - static_cast<std::int32_t>((1.0f - defender_supply) * 100'000.0f));
 
     // Check conclusion
     if (b.attacker_morale_ppm == 0 || b.defender_morale_ppm == 0 ||

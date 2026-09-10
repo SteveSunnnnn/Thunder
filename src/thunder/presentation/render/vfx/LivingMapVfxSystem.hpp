@@ -43,6 +43,8 @@ public:
     void render(UiDrawList& ui, UiRect scissor = {});
 
     [[nodiscard]] std::size_t particle_count() const noexcept { return particles_.size(); }
+    [[nodiscard]] std::size_t train_count() const noexcept { return trains_.size(); }
+    [[nodiscard]] std::size_t ship_count() const noexcept { return ships_.size(); }
 
 private:
     std::vector<SteamTrainVfx> trains_;

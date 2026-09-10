@@ -18,34 +18,50 @@ void LivingMapVfxSystem::update(float dt) {
         const float dx = tr.target_x - tr.x;
         const float dy = tr.target_y - tr.y;
         const float dist = std::sqrt(dx * dx + dy * dy);
-        if (dist > 1.0f) {
-            tr.x += (dx / dist) * tr.speed * dt;
-            tr.y += (dy / dist) * tr.speed * dt;
-        }
-
-        tr.smoke_timer += dt;
-        if (tr.smoke_timer >= 0.2f) {
-            tr.smoke_timer = 0.0f;
-            particles_.push_back({tr.x, tr.y, 4.0f, 0.8f, 1.2f});
+        const float step = tr.speed * dt;
+        if (dist > 1.0f && step < dist) {
+            tr.x += (dx / dist) * step;
+            tr.y += (dy / dist) * step;
+            tr.smoke_timer += dt;
+            if (tr.smoke_timer >= 0.2f) {
+                tr.smoke_timer = 0.0f;
+                particles_.push_back({tr.x, tr.y, 4.0f, 0.8f, 1.2f});
+            }
+        } else {
+            tr.x = tr.target_x;
+            tr.y = tr.target_y;
         }
     }
+    std::erase_if(trains_, [](const auto& tr) {
+        const float dx = tr.target_x - tr.x;
+        const float dy = tr.target_y - tr.y;
+        return (dx * dx + dy * dy) <= 1.0f;
+    });
 
     // Update ships
     for (auto& sh : ships_) {
         const float dx = sh.target_x - sh.x;
         const float dy = sh.target_y - sh.y;
         const float dist = std::sqrt(dx * dx + dy * dy);
-        if (dist > 1.0f) {
-            sh.x += (dx / dist) * sh.speed * dt;
-            sh.y += (dy / dist) * sh.speed * dt;
-        }
-
-        sh.wake_timer += dt;
-        if (sh.wake_timer >= 0.3f) {
-            sh.wake_timer = 0.0f;
-            particles_.push_back({sh.x, sh.y, 6.0f, 0.5f, 2.0f});
+        const float step = sh.speed * dt;
+        if (dist > 1.0f && step < dist) {
+            sh.x += (dx / dist) * step;
+            sh.y += (dy / dist) * step;
+            sh.wake_timer += dt;
+            if (sh.wake_timer >= 0.3f) {
+                sh.wake_timer = 0.0f;
+                particles_.push_back({sh.x, sh.y, 6.0f, 0.5f, 2.0f});
+            }
+        } else {
+            sh.x = sh.target_x;
+            sh.y = sh.target_y;
         }
     }
+    std::erase_if(ships_, [](const auto& sh) {
+        const float dx = sh.target_x - sh.x;
+        const float dy = sh.target_y - sh.y;
+        return (dx * dx + dy * dy) <= 1.0f;
+    });
 
     // Update particles
     for (auto& p : particles_) {

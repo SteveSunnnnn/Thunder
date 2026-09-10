@@ -640,6 +640,35 @@ static void test_terrain_clipmap_compact_stable_build() {
     assert(stats2.snapped_origin_x != first_origin_x);
 }
 
+static void test_terrain_clipmap_configuration_validation() {
+    TerrainClipmap valid_clipmap;
+    assert(valid_clipmap.max_patch_count() > 0);
+
+    bool threw_zero_levels = false;
+    try {
+        TerrainClipmap bad{{0u, 8u, 1024.0, 256.0}};
+    } catch (const std::invalid_argument&) {
+        threw_zero_levels = true;
+    }
+    assert(threw_zero_levels);
+
+    bool threw_excessive_levels = false;
+    try {
+        TerrainClipmap bad{{33u, 8u, 1024.0, 256.0}};
+    } catch (const std::invalid_argument&) {
+        threw_excessive_levels = true;
+    }
+    assert(threw_excessive_levels);
+
+    bool threw_odd_patches = false;
+    try {
+        TerrainClipmap bad{{4u, 7u, 1024.0, 256.0}};
+    } catch (const std::invalid_argument&) {
+        threw_odd_patches = true;
+    }
+    assert(threw_odd_patches);
+}
+
 static void test_streaming_budget_adapts_to_frame_pressure() {
     StreamingBudgetController budget;
     const auto initial = budget.bytes_per_frame();
@@ -1589,6 +1618,7 @@ int main() {
     test_gpu_capability_tiers();
     test_strategic_camera_precision_and_zoom();
     test_terrain_clipmap_compact_stable_build();
+    test_terrain_clipmap_configuration_validation();
     test_height_page_quantization();
     test_terrain_page_cache_and_streaming_plan();
     test_streaming_budget_adapts_to_frame_pressure();
