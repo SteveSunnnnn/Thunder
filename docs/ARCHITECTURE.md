@@ -237,6 +237,15 @@ GIS / DEM / 作者化空间层  (外部数据；--provinces 必填，见 tools/t
    （含 configure 期 fast-math 拒绝与 `FpEnvironment` 运行期指纹）。
 7. **当前 MSVC 验证缺口。** 引擎源码清理后，`src/thunder` 与 `src/apps` 的 MSVC
    编译状态需要重新复验。
+8. **RenderGraph 为编译期 DAG 分析器而非运行时调度权威。** 当前桌面渲染器运行时由
+   `VulkanFrame`（`src/thunder/presentation/render/vulkan/VulkanFrame.cpp`）作为唯一
+   权威执行实体，显式记录指令缓冲并经 Synchronization2（`VkImageMemoryBarrier2`）插入
+   资源屏障；`RenderGraph` 负责编译期 DAG 危害分析、拓扑排序与静态验证，目前不被
+   `VulkanFrame` 直接消费。
+9. **GPU Culling 现阶段为 CPU 参考实现（`CpuVisibilityPipeline` / `GpuCullingReference`）。**
+   类名与实现已明确对齐其真实能力：目前在 CPU 完成视锥体（Frustum）与距离剔除、
+   LOD 分级判定，并输出标准 `VkDrawIndexedIndirectCommand` 结构。基于 Compute Shader
+   的 GPU-driven 剔除、Compaction 与 indirect-count 属于后续演进阶段，避免类名提前代表尚未接通的能力。
 
 ## 9. 参考模式与下一步拆分
 

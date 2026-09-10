@@ -30,8 +30,8 @@ but gameplay correctness cannot depend on them.
 3. Acquire a retired `FrameRing` slot; only wait if all slots remain live.
 4. Acquire swapchain image.
 5. Consume newest simulation snapshot, if any.
-6. Build/compile cached RenderGraph shape as required.
-7. Record independent graph batches in parallel once the render worker pool lands.
+6. Build/compile cached RenderGraph shape as required (static DAG hazard verification).
+7. In the current runtime, `VulkanFrame` authoritatively records command buffers and emits `VkImageMemoryBarrier2` transitions; future multi-worker frame paths will consume graph batches once the render worker pool lands.
 8. Submit via `vkQueueSubmit2` / Synchronization2.
 9. Signal next frame timeline value.
 10. Present.
