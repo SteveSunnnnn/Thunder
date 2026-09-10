@@ -272,7 +272,7 @@ int main() {
         for (int day = 0; day < 12 && !battle.is_concluded; ++day) {
             battle_sys.advance_battle_day(battle, sup_raided, 1.0f);
         }
-        assert(battle.phase_days_elapsed >= 0);
+        assert(battle.phase_days_elapsed <= 3);
         assert(battle.attacker_manpower < 10000 || battle.defender_manpower < 10000);
 
         std::cout << "  [PASS] LogisticsNetwork convoy raiding and multi-phase battle tactics\n";

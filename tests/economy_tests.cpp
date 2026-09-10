@@ -508,7 +508,7 @@ static void test_sovereign_restructuring_writes_down_debt() {
     // channel); the saver pool absorbs the rest. The exclusion clock resets
     // to a year of market exile.
     EconomyDefinitions definitions;
-    const auto grain = definitions.add_good({"grain", 1000});
+    (void)definitions.add_good({"grain", 1000});
     const std::array<NeedFlow, 0> no_needs{};
     (void)definitions.add_need_profile("workers", no_needs);
 

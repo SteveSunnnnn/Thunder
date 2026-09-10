@@ -761,8 +761,8 @@ void GrandStrategyStore::update_migration_flows(World& world) {
 
 void GrandStrategyStore::generate_autonomous_migration_flows(World& world,
                                                              const EconomyDefinitions& definitions) {
-    const auto prov_count = world.geography.province_count();
-    if (prov_count == 0) return;
+    const auto prov_count = static_cast<std::uint32_t>(world.geography.province_count());
+    if (prov_count == 0u) return;
     // Single-pass province aggregates: unemployment pushes, vacancies pull.
     std::vector<std::uint64_t> unemployed(prov_count, 0u);
     std::vector<std::uint64_t> pop_total(prov_count, 0u);

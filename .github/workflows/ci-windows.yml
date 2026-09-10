@@ -13,5 +13,5 @@ jobs:
         run: cmake --preset release-headless -DTHUNDER_WARNINGS_AS_ERRORS=ON
       - name: Build
         run: cmake --build --preset release-headless --parallel 2
-      - name: Run Test Suites (27 Test Suites Merge Gate)
+      - name: Run Test Suites (28 Test Suites Merge Gate)
         run: ctest --preset release-headless --output-on-failure

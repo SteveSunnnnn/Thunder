@@ -286,10 +286,8 @@ std::array<float, 2> QuantizedMeshView::uv(std::uint32_t vertex) const noexcept 
     const auto offset = mesh_header_bytes + static_cast<std::uint64_t>(vertex_count) * position_bytes +
                         (has_normals ? static_cast<std::uint64_t>(vertex_count) * normal_bytes : 0u) +
                         static_cast<std::uint64_t>(vertex) * uv_bytes;
-    const auto u = static_cast<std::uint16_t>(std::to_integer<std::uint8_t>(payload[offset])) |
-                   static_cast<std::uint16_t>(std::to_integer<std::uint8_t>(payload[offset + 1u])) << 8u;
-    const auto v = static_cast<std::uint16_t>(std::to_integer<std::uint8_t>(payload[offset + 2u])) |
-                   static_cast<std::uint16_t>(std::to_integer<std::uint8_t>(payload[offset + 3u])) << 8u;
+    const auto u = read_le<std::uint16_t>(payload, offset);
+    const auto v = read_le<std::uint16_t>(payload, offset + 2u);
     return {half_to_float(u), half_to_float(v)};
 }
 

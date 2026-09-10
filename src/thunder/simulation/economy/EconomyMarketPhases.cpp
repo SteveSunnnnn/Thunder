@@ -752,10 +752,11 @@ JobDispatchStats EconomySystem::settlement(World& world, JobSystem& jobs) {
                     if (write_off > 0) {
                         const auto bank_part = world.banks.write_down_sovereign_bonds(country, write_off);
                         const auto pool_part = saturating_sub(write_off, bank_part);
-                        if (pool_part > 0)
-                            world.grand_strategy.withdraw_investment_pool_funds(country, pool_part);
+                        const auto pool_withdrawn = (pool_part > 0)
+                            ? world.grand_strategy.withdraw_investment_pool_funds(country, pool_part)
+                            : 0;
                         world.countries.add_national_debt_milli(country,
-                            -saturating_add(bank_part, pool_part));
+                            -saturating_add(bank_part, pool_withdrawn));
                         world.countries.set_default_weeks(country, 52);
                         world.countries.evaluate_credit_rating(country);
                     }

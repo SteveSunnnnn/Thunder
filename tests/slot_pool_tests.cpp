@@ -51,6 +51,7 @@ static void test_generation_increment() {
 static void test_free_list_lifo() {
     SlotPool pool;
     auto a = pool.allocate();  // index 0
+    assert(a.index == 0);
     auto b = pool.allocate();  // index 1
     auto c = pool.allocate();  // index 2
 

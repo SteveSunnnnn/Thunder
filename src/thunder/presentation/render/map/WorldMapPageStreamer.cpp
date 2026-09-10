@@ -268,13 +268,13 @@ void WorldMapPageStreamer::build_world_patches(std::array<float, 4> map_view,
             int level_a = fine;
             auto ancestor_x = key_x;
             auto ancestor_y = chunk_y;
-            while (level_a < kWorldLevelCount &&
+            while (level_a < static_cast<int>(kWorldLevelCount) &&
                    resident_[level_a][world_page_index(level_a, ancestor_x, ancestor_y)] == 0u) {
                 ++level_a;
                 ancestor_x >>= 1;
                 ancestor_y >>= 1;
             }
-            if (level_a >= kWorldLevelCount) continue;
+            if (level_a >= static_cast<int>(kWorldLevelCount)) continue;
 
             int level_b = level_a;
             float morph = 1.0f;

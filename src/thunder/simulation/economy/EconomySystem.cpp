@@ -160,7 +160,8 @@ void EconomySystem::ensure_market_scratch(std::size_t markets) {
     if (market_demanded_scratch_.size() != markets) market_demanded_scratch_.assign(markets, 0);
     if (market_fulfilled_scratch_.size() != markets) market_fulfilled_scratch_.assign(markets, 0);
     if (market_spoilage_scratch_.size() != markets) market_spoilage_scratch_.assign(markets, 0);
-    if (market_carry_scratch_.size() != markets) market_carry_scratch_.assign(markets, 0);    const std::size_t profile_cells = markets * definitions_.need_profile_count();
+    if (market_carry_scratch_.size() != markets) market_carry_scratch_.assign(markets, 0);
+    const std::size_t profile_cells = markets * definitions_.need_profile_count();
     if (profile_population_.size() != profile_cells) profile_population_.assign(profile_cells, 0u);
     if (profile_basket_cost_milli_.size() != profile_cells) profile_basket_cost_milli_.assign(profile_cells, 0);
     if (profile_fulfillment_ppm_.size() != profile_cells) profile_fulfillment_ppm_.assign(profile_cells, ppm_scale);

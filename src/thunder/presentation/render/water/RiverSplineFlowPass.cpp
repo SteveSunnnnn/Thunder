@@ -25,7 +25,6 @@ Vec3 RiverSplineFlowPass::evaluate_river_lighting(
     // 1. Two-phase scrolling flow map normal perturbation
     const float flow_phase1 = time_s * 0.8f - std::floor(time_s * 0.8f);
     const float flow_phase2 = (time_s * 0.8f + 0.5f) - std::floor(time_s * 0.8f + 0.5f);
-    const float flow_lerp = std::abs((flow_phase1 - 0.5f) * 2.0f);
 
     const float u1 = world_pos.x * 0.05f + flow_dir.x * flow_phase1;
     const float v1 = world_pos.y * 0.05f + flow_dir.y * flow_phase1;
