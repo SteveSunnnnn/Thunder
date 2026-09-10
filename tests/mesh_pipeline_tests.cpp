@@ -25,6 +25,25 @@ void put_u32(std::vector<std::byte>& out, std::uint32_t v) {
         out.push_back(static_cast<std::byte>((v >> (i * 8u)) & 0xffu));
 }
 
+std::vector<std::byte> pack_glb(std::string_view json, std::span<const std::byte> bin) {
+    std::vector<std::byte> glb;
+    const auto json_pad = (4u - json.size() % 4u) % 4u;
+    const auto bin_pad = (4u - bin.size() % 4u) % 4u;
+    const auto total = 12u + 8u + json.size() + json_pad + 8u + bin.size() + bin_pad;
+    put_u32(glb, 0x46546c67u);
+    put_u32(glb, 2u);
+    put_u32(glb, static_cast<std::uint32_t>(total));
+    put_u32(glb, static_cast<std::uint32_t>(json.size() + json_pad));
+    put_u32(glb, 0x4e4f534au);
+    for (const char c : json) glb.push_back(static_cast<std::byte>(c));
+    for (std::uint32_t i = 0; i < json_pad; ++i) glb.push_back(std::byte{0x20});
+    put_u32(glb, static_cast<std::uint32_t>(bin.size() + bin_pad));
+    put_u32(glb, 0x004e4942u);
+    glb.insert(glb.end(), bin.begin(), bin.end());
+    for (std::uint32_t i = 0; i < bin_pad; ++i) glb.push_back(std::byte{0});
+    return glb;
+}
+
 // Builds a minimal but structurally complete .glb: one mesh, one triangle-list
 // primitive with POSITION/NORMAL/TEXCOORD_0 and uint16 indices.
 std::vector<std::byte> build_test_glb() {
@@ -73,22 +92,7 @@ std::vector<std::byte> build_test_glb() {
         ]
     })";
 
-    std::vector<std::byte> glb;
-    const auto json_pad = (4u - json.size() % 4u) % 4u;
-    const auto bin_pad = (4u - bin.size() % 4u) % 4u;
-    const auto total = 12u + 8u + json.size() + json_pad + 8u + bin.size() + bin_pad;
-    put_u32(glb, 0x46546c67u);
-    put_u32(glb, 2u);
-    put_u32(glb, static_cast<std::uint32_t>(total));
-    put_u32(glb, static_cast<std::uint32_t>(json.size() + json_pad));
-    put_u32(glb, 0x4e4f534au);
-    for (const char c : json) glb.push_back(static_cast<std::byte>(c));
-    for (std::uint32_t i = 0; i < json_pad; ++i) glb.push_back(std::byte{0x20});
-    put_u32(glb, static_cast<std::uint32_t>(bin.size() + bin_pad));
-    put_u32(glb, 0x004e4942u);
-    glb.insert(glb.end(), bin.begin(), bin.end());
-    for (std::uint32_t i = 0; i < bin_pad; ++i) glb.push_back(std::byte{0});
-    return glb;
+    return pack_glb(json, bin);
 }
 
 void test_glb_import() {
@@ -228,11 +232,302 @@ void test_assetpack_mesh_end_to_end() {
     std::filesystem::remove(pack_path, ec);
 }
 
+void test_glb_normalized_unorm8_snorm8() {
+    // 3 vertices: float3 positions, int8_t (SNORM8) normals, uint8_t (UNORM8) UVs
+    struct Vec3 { float x, y, z; };
+    const std::array<Vec3, 3> positions{{{0.0f, 0.0f, 0.0f}, {1.0f, 0.0f, 0.0f}, {0.0f, 1.0f, 0.0f}}};
+    struct Norm8 { std::int8_t x, y, z; };
+    // Test -128 clamping to -1.0f per glTF 2.0 normalization spec max(raw / 127.0, -1.0)
+    const std::array<Norm8, 3> normals{{{0, 127, 0}, {-128, 0, 0}, {0, 0, 127}}};
+    struct Uv8 { std::uint8_t u, v; };
+    const std::array<Uv8, 3> uvs{{{0, 255}, {255, 128}, {128, 0}}};
+    const std::array<std::uint16_t, 3> indices{{0, 1, 2}};
+
+    std::vector<std::byte> bin;
+    auto append = [&bin](const void* data, std::size_t size) {
+        const auto* b = static_cast<const std::byte*>(data);
+        bin.insert(bin.end(), b, b + size);
+    };
+    append(positions.data(), sizeof(positions)); // 36
+    append(normals.data(), sizeof(normals));     // 9
+    append(uvs.data(), sizeof(uvs));             // 6
+    while (bin.size() % 2u != 0) bin.push_back(std::byte{0}); // align for uint16
+    const auto idx_offset = bin.size();
+    append(indices.data(), sizeof(indices));     // 6
+
+    const std::string json = std::string(R"({
+        "asset": {"version": "2.0"},
+        "meshes": [{
+            "primitives": [{
+                "attributes": {"POSITION": 0, "NORMAL": 1, "TEXCOORD_0": 2},
+                "indices": 3
+            }]
+        }],
+        "bufferViews": [
+            {"buffer": 0, "byteOffset": 0, "byteLength": 36},
+            {"buffer": 0, "byteOffset": 36, "byteLength": 9},
+            {"buffer": 0, "byteOffset": 45, "byteLength": 6},
+            {"buffer": 0, "byteOffset": )") + std::to_string(idx_offset) + R"(, "byteLength": 6}
+        ],
+        "accessors": [
+            {"bufferView": 0, "componentType": 5126, "count": 3, "type": "VEC3"},
+            {"bufferView": 1, "componentType": 5120, "count": 3, "type": "VEC3", "normalized": true},
+            {"bufferView": 2, "componentType": 5121, "count": 3, "type": "VEC2", "normalized": true},
+            {"bufferView": 3, "componentType": 5123, "count": 3, "type": "SCALAR"}
+        ]
+    })";
+
+    const auto glb = pack_glb(json, bin);
+    const auto meshes = import_glb_meshes(glb);
+    assert(meshes.size() == 1u);
+    const auto& mesh = meshes.front();
+    assert(mesh.vertex_count() == 3u);
+    assert(mesh.index_count() == 3u);
+
+    // Check SNORM8 normals for all 3 vertices (including -128 clamp and vertex 2)
+    assert(std::abs(mesh.normals[0] - 0.0f) < 1e-4f);
+    assert(std::abs(mesh.normals[1] - 1.0f) < 1e-4f);
+    assert(std::abs(mesh.normals[2] - 0.0f) < 1e-4f);
+    assert(std::abs(mesh.normals[3] - (-1.0f)) < 1e-4f);
+    assert(std::abs(mesh.normals[4] - 0.0f) < 1e-4f);
+    assert(std::abs(mesh.normals[5] - 0.0f) < 1e-4f);
+    assert(std::abs(mesh.normals[6] - 0.0f) < 1e-4f);
+    assert(std::abs(mesh.normals[7] - 0.0f) < 1e-4f);
+    assert(std::abs(mesh.normals[8] - 1.0f) < 1e-4f);
+
+    // Check UNORM8 UVs for all 3 vertices
+    assert(std::abs(mesh.uvs[0] - 0.0f) < 1e-4f);
+    assert(std::abs(mesh.uvs[1] - 1.0f) < 1e-4f);
+    assert(std::abs(mesh.uvs[2] - 1.0f) < 1e-4f);
+    assert(std::abs(mesh.uvs[3] - (128.0f / 255.0f)) < 1e-4f);
+    assert(std::abs(mesh.uvs[4] - (128.0f / 255.0f)) < 1e-4f);
+    assert(std::abs(mesh.uvs[5] - 0.0f) < 1e-4f);
+}
+
+void test_glb_normalized_unorm16_snorm16() {
+    // 3 vertices: float3 positions, int16_t (SNORM16) normals, uint16_t (UNORM16) UVs
+    struct Vec3 { float x, y, z; };
+    const std::array<Vec3, 3> positions{{{0.0f, 0.0f, 0.0f}, {1.0f, 0.0f, 0.0f}, {0.0f, 1.0f, 0.0f}}};
+    struct Norm16 { std::int16_t x, y, z; };
+    // Test -32768 clamping to -1.0f per glTF 2.0 normalization spec max(raw / 32767.0, -1.0)
+    const std::array<Norm16, 3> normals{{{0, 32767, 0}, {-32768, 0, 0}, {0, 0, 32767}}};
+    struct Uv16 { std::uint16_t u, v; };
+    const std::array<Uv16, 3> uvs{{{0, 65535}, {65535, 32768}, {32768, 0}}};
+    const std::array<std::uint16_t, 3> indices{{0, 1, 2}};
+
+    std::vector<std::byte> bin;
+    auto append = [&bin](const void* data, std::size_t size) {
+        const auto* b = static_cast<const std::byte*>(data);
+        bin.insert(bin.end(), b, b + size);
+    };
+    append(positions.data(), sizeof(positions)); // 36
+    append(normals.data(), sizeof(normals));     // 18
+    append(uvs.data(), sizeof(uvs));             // 12
+    append(indices.data(), sizeof(indices));     // 6
+
+    const std::string json = R"({
+        "asset": {"version": "2.0"},
+        "meshes": [{
+            "primitives": [{
+                "attributes": {"POSITION": 0, "NORMAL": 1, "TEXCOORD_0": 2},
+                "indices": 3
+            }]
+        }],
+        "bufferViews": [
+            {"buffer": 0, "byteOffset": 0, "byteLength": 36},
+            {"buffer": 0, "byteOffset": 36, "byteLength": 18},
+            {"buffer": 0, "byteOffset": 54, "byteLength": 12},
+            {"buffer": 0, "byteOffset": 66, "byteLength": 6}
+        ],
+        "accessors": [
+            {"bufferView": 0, "componentType": 5126, "count": 3, "type": "VEC3"},
+            {"bufferView": 1, "componentType": 5122, "count": 3, "type": "VEC3", "normalized": true},
+            {"bufferView": 2, "componentType": 5123, "count": 3, "type": "VEC2", "normalized": true},
+            {"bufferView": 3, "componentType": 5123, "count": 3, "type": "SCALAR"}
+        ]
+    })";
+
+    const auto glb = pack_glb(json, bin);
+    const auto meshes = import_glb_meshes(glb);
+    assert(meshes.size() == 1u);
+    const auto& mesh = meshes.front();
+    assert(mesh.vertex_count() == 3u);
+
+    // Check SNORM16 normals across all 3 vertices
+    assert(std::abs(mesh.normals[0] - 0.0f) < 1e-4f);
+    assert(std::abs(mesh.normals[1] - 1.0f) < 1e-4f);
+    assert(std::abs(mesh.normals[2] - 0.0f) < 1e-4f);
+    assert(std::abs(mesh.normals[3] - (-1.0f)) < 1e-4f);
+    assert(std::abs(mesh.normals[4] - 0.0f) < 1e-4f);
+    assert(std::abs(mesh.normals[5] - 0.0f) < 1e-4f);
+    assert(std::abs(mesh.normals[6] - 0.0f) < 1e-4f);
+    assert(std::abs(mesh.normals[7] - 0.0f) < 1e-4f);
+    assert(std::abs(mesh.normals[8] - 1.0f) < 1e-4f);
+
+    // Check UNORM16 UVs across all 3 vertices
+    assert(std::abs(mesh.uvs[0] - 0.0f) < 1e-4f);
+    assert(std::abs(mesh.uvs[1] - 1.0f) < 1e-4f);
+    assert(std::abs(mesh.uvs[2] - 1.0f) < 1e-4f);
+    assert(std::abs(mesh.uvs[3] - (32768.0f / 65535.0f)) < 1e-4f);
+    assert(std::abs(mesh.uvs[4] - (32768.0f / 65535.0f)) < 1e-4f);
+    assert(std::abs(mesh.uvs[5] - 0.0f) < 1e-4f);
+}
+
+void test_glb_interleaved_and_accessor_offset() {
+    // 4 interleaved vertices sharing a single bufferView with byteStride = 32
+    // Accessor offsets:
+    // POSITION: offset 0 (VEC3 float)
+    // NORMAL: offset 12 (VEC3 float)
+    // TEXCOORD_0: offset 24 (VEC2 float)
+    struct Vertex {
+        float pos[3];
+        float norm[3];
+        float uv[2];
+    };
+    static_assert(sizeof(Vertex) == 32u);
+
+    const std::array<Vertex, 4> vertices{{
+        {{0.0f, 0.0f, 0.0f}, {0.0f, 1.0f, 0.0f}, {0.0f, 0.0f}},
+        {{1.0f, 0.0f, 0.0f}, {0.0f, 1.0f, 0.0f}, {1.0f, 0.0f}},
+        {{1.0f, 2.0f, 0.0f}, {0.0f, 1.0f, 0.0f}, {1.0f, 1.0f}},
+        {{0.0f, 2.0f, 0.0f}, {0.0f, 1.0f, 0.0f}, {0.0f, 1.0f}}
+    }};
+    const std::array<std::uint16_t, 6> indices{{0, 1, 2, 0, 2, 3}};
+
+    std::vector<std::byte> bin;
+    auto append = [&bin](const void* data, std::size_t size) {
+        const auto* b = static_cast<const std::byte*>(data);
+        bin.insert(bin.end(), b, b + size);
+    };
+    append(vertices.data(), sizeof(vertices)); // 4 * 32 = 128 bytes
+    append(indices.data(), sizeof(indices));   // 12 bytes
+
+    const std::string json = R"({
+        "asset": {"version": "2.0"},
+        "meshes": [{
+            "primitives": [{
+                "attributes": {"POSITION": 0, "NORMAL": 1, "TEXCOORD_0": 2},
+                "indices": 3
+            }]
+        }],
+        "bufferViews": [
+            {"buffer": 0, "byteOffset": 0, "byteLength": 128, "byteStride": 32},
+            {"buffer": 0, "byteOffset": 128, "byteLength": 12}
+        ],
+        "accessors": [
+            {"bufferView": 0, "byteOffset": 0, "componentType": 5126, "count": 4, "type": "VEC3"},
+            {"bufferView": 0, "byteOffset": 12, "componentType": 5126, "count": 4, "type": "VEC3"},
+            {"bufferView": 0, "byteOffset": 24, "componentType": 5126, "count": 4, "type": "VEC2"},
+            {"bufferView": 1, "componentType": 5123, "count": 6, "type": "SCALAR"}
+        ]
+    })";
+
+    const auto glb = pack_glb(json, bin);
+    const auto meshes = import_glb_meshes(glb);
+    assert(meshes.size() == 1u);
+    const auto& mesh = meshes.front();
+    assert(mesh.vertex_count() == 4u);
+    assert(mesh.index_count() == 6u);
+
+    // Verify all 4 vertices, especially the 4th vertex (index 3) to prove count wasn't truncated
+    assert(mesh.positions[9] == 0.0f && mesh.positions[10] == 2.0f && mesh.positions[11] == 0.0f);
+    assert(mesh.normals[9] == 0.0f && mesh.normals[10] == 1.0f && mesh.normals[11] == 0.0f);
+    assert(mesh.uvs[6] == 0.0f && mesh.uvs[7] == 1.0f);
+
+    // Verify bounds
+    assert(mesh.bounds.min[0] == 0.0f && mesh.bounds.max[0] == 1.0f);
+    assert(mesh.bounds.min[1] == 0.0f && mesh.bounds.max[1] == 2.0f);
+
+    // End-to-end cook and decode verification for interleaved buffer
+    const auto payload = cook_glb_mesh_payload(glb);
+    const auto cooked = decode_quantized_mesh(payload);
+    assert(cooked.vertex_count == 4u);
+    assert(cooked.index_count == 6u);
+    assert(cooked.has_normals && cooked.has_uvs);
+    const auto v3_pos = cooked.position(3);
+    assert(v3_pos[0] == 0.0f && v3_pos[1] == 2.0f && v3_pos[2] == 0.0f);
+}
+
+void test_glb_multi_primitive() {
+    // 1 mesh with 2 primitives:
+    // Primitive 0: triangle at X in [0, 1]
+    // Primitive 1: triangle at X in [2, 3]
+    struct Vec3 { float x, y, z; };
+    const std::array<Vec3, 3> p0_positions{{{0.0f, 0.0f, 0.0f}, {1.0f, 0.0f, 0.0f}, {0.0f, 1.0f, 0.0f}}};
+    const std::array<std::uint16_t, 3> p0_indices{{0, 1, 2}};
+
+    const std::array<Vec3, 3> p1_positions{{{2.0f, 0.0f, 0.0f}, {3.0f, 0.0f, 0.0f}, {2.0f, 1.0f, 0.0f}}};
+    const std::array<std::uint16_t, 3> p1_indices{{0, 1, 2}};
+
+    std::vector<std::byte> bin;
+    auto append = [&bin](const void* data, std::size_t size) {
+        const auto* b = static_cast<const std::byte*>(data);
+        bin.insert(bin.end(), b, b + size);
+    };
+    append(p0_positions.data(), sizeof(p0_positions)); // 36
+    append(p0_indices.data(), sizeof(p0_indices));     // 6
+    append(p1_positions.data(), sizeof(p1_positions)); // 36
+    append(p1_indices.data(), sizeof(p1_indices));     // 6
+
+    const std::string json = R"({
+        "asset": {"version": "2.0"},
+        "meshes": [{
+            "primitives": [
+                {
+                    "attributes": {"POSITION": 0},
+                    "indices": 1
+                },
+                {
+                    "attributes": {"POSITION": 2},
+                    "indices": 3
+                }
+            ]
+        }],
+        "bufferViews": [
+            {"buffer": 0, "byteOffset": 0, "byteLength": 36},
+            {"buffer": 0, "byteOffset": 36, "byteLength": 6},
+            {"buffer": 0, "byteOffset": 42, "byteLength": 36},
+            {"buffer": 0, "byteOffset": 78, "byteLength": 6}
+        ],
+        "accessors": [
+            {"bufferView": 0, "componentType": 5126, "count": 3, "type": "VEC3"},
+            {"bufferView": 1, "componentType": 5123, "count": 3, "type": "SCALAR"},
+            {"bufferView": 2, "componentType": 5126, "count": 3, "type": "VEC3"},
+            {"bufferView": 3, "componentType": 5123, "count": 3, "type": "SCALAR"}
+        ]
+    })";
+
+    const auto glb = pack_glb(json, bin);
+    const auto meshes = import_glb_meshes(glb);
+    assert(meshes.size() == 1u);
+    const auto& mesh = meshes.front();
+    // 3 + 3 = 6 vertices
+    assert(mesh.vertex_count() == 6u);
+    // 3 + 3 = 6 indices
+    assert(mesh.index_count() == 6u);
+
+    // Check rebased indices: primitive 0 has {0, 1, 2}, primitive 1 has {3, 4, 5}
+    assert(mesh.indices[0] == 0u && mesh.indices[1] == 1u && mesh.indices[2] == 2u);
+    assert(mesh.indices[3] == 3u && mesh.indices[4] == 4u && mesh.indices[5] == 5u);
+
+    // Check positions
+    assert(mesh.positions[0] == 0.0f && mesh.positions[3] == 1.0f);
+    assert(mesh.positions[9] == 2.0f && mesh.positions[12] == 3.0f);
+
+    // Check bounds across both primitives
+    assert(mesh.bounds.min[0] == 0.0f);
+    assert(mesh.bounds.max[0] == 3.0f);
+}
+
 } // namespace
 
 int main() {
     test_glb_import();
     test_glb_rejects_malformed();
+    test_glb_normalized_unorm8_snorm8();
+    test_glb_normalized_unorm16_snorm16();
+    test_glb_interleaved_and_accessor_offset();
+    test_glb_multi_primitive();
     test_octahedral_normal_roundtrip();
     test_quantized_mesh_roundtrip();
     test_quantized_mesh_rejects_garbage();

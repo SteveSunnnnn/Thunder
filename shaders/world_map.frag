@@ -710,67 +710,48 @@ float sovereign_border_smooth(vec2 mapUv, uint centre_id, vec4 centre_colour, ou
         out_prov_stroke = prov_diff > 0.01 ? (1.0 - smoothstep(0.0, 1.1, prov_dist_px)) : 0.0;
     }
 
-    // --- 2. Sovereign National Frontier evaluation ---
-    // Find canonical reference country color across the cell (smallest non-zero, non-water ID)
-    uint id_ref = 0u;
-    if (id00 != 0u && c00.a > 0.5) id_ref = id00;
-    if (id10 != 0u && c10.a > 0.5 && (id_ref == 0u || id10 < id_ref)) id_ref = id10;
-    if (id01 != 0u && c01.a > 0.5 && (id_ref == 0u || id01 < id_ref)) id_ref = id01;
-    if (id11 != 0u && c11.a > 0.5 && (id_ref == 0u || id11 < id_ref)) id_ref = id11;
-
-    if (id_ref == 0u) {
-        out_ribbon = 0.0;
-        out_pigment = srgb_to_linear(centre_colour.rgb);
+    // Aggregate all four country identities. Treating every non-reference
+    // corner as the same country caused coloured square patches at junctions.
+    uint ids[4] = uint[4](id00,id10,id01,id11);
+    vec4 colours[4] = vec4[4](c00,c10,c01,c11);
+    uint owners[4];
+    for (int i=0;i<4;++i) owners[i]=political_identity[ids[i]].x;
+    if (all(equal(uvec4(owners[0],owners[1],owners[2],owners[3]),uvec4(owners[0])))) {
+        out_ribbon=0.0;
+        out_pigment=srgb_to_linear(centre_colour.rgb);
         return 0.0;
     }
-
-    vec4 c_ref = political_colour(id_ref);
-
-    // Weight of reference country across the 4 corners (only land corners count)
-    uint owner_ref = political_identity[id_ref].x;
-    float w00 = (id00 != 0u && c00.a > 0.5 && political_identity[id00].x == owner_ref) ? 1.0 : 0.0;
-    float w10 = (id10 != 0u && c10.a > 0.5 && political_identity[id10].x == owner_ref) ? 1.0 : 0.0;
-    float w01 = (id01 != 0u && c01.a > 0.5 && political_identity[id01].x == owner_ref) ? 1.0 : 0.0;
-    float w11 = (id11 != 0u && c11.a > 0.5 && political_identity[id11].x == owner_ref) ? 1.0 : 0.0;
-
-    // Check if cell has a sovereign boundary between distinct countries
-    float diff_sum = abs(w00 - w10) + abs(w00 - w01) + abs(w10 - w11) + abs(w01 - w11);
-    if (diff_sum < 0.01) {
-        out_ribbon = 0.0;
-        out_pigment = srgb_to_linear(centre_colour.rgb);
+    float weights[4]=float[4]((1.0-mf.x)*(1.0-mf.y),mf.x*(1.0-mf.y),(1.0-mf.x)*mf.y,mf.x*mf.y);
+    vec2 derivatives[4]=vec2[4](vec2(-(1.0-mf.y),-(1.0-mf.x)),vec2(1.0-mf.y,-mf.x),
+                                      vec2(-mf.y,1.0-mf.x),vec2(mf.y,mf.x));
+    float scores[4];
+    vec2 gradients[4];
+    int first=-1;
+    for (int i=0;i<4;++i) {
+        scores[i]=0.0; gradients[i]=vec2(0.0);
+        if (ids[i]==0u || colours[i].a<0.5) continue;
+        for (int j=0;j<4;++j) if (ids[j]!=0u && colours[j].a>0.5 && owners[j]==owners[i]) {
+            scores[i]+=weights[j]; gradients[i]+=derivatives[j];
+        }
+        if (first<0 || scores[i]>scores[first]) first=i;
+    }
+    int second=-1;
+    for (int i=0;i<4;++i) {
+        if (ids[i]==0u || colours[i].a<0.5 || first<0 || owners[i]==owners[first]) continue;
+        if (second<0 || scores[i]>scores[second]) second=i;
+    }
+    if (first<0 || second<0) {
+        out_ribbon=0.0;
+        out_pigment=srgb_to_linear(centre_colour.rgb);
         return 0.0;
     }
-
-    // Identify the secondary neighboring country color in this cell
-    vec4 c_other = (w00 < 0.5) ? c00 : ((w10 < 0.5) ? c10 : ((w01 < 0.5) ? c01 : c11));
-
-    // If neighbor is water, this is a coastline rather than a political frontier between two nations
-    if (c_other.a < 0.5) {
-        out_ribbon = 0.0;
-        out_pigment = srgb_to_linear(centre_colour.rgb);
-        return 0.0;
-    }
-
-    // Smooth continuous country membership field
-    float field = mix(mix(w00, w10, mf.x), mix(w01, w11, mf.x), mf.y);
-
-    // Continuous anti-aliased transition between country colors along field = 0.5
-    float fill_blend = smoothstep(0.48, 0.52, field);
-    out_pigment = srgb_to_linear(mix(c_other.rgb, c_ref.rgb, fill_blend));
-
-    // Analytic distance in texels, converted to screen pixels without dFdx quad spikes
-    vec2 grad_tex = vec2(mix(w10 - w00, w11 - w01, mf.y),
-                         mix(w01 - w00, w11 - w10, mf.x));
-    float texel_dist = abs(field - 0.5) / max(length(grad_tex), 1.0e-3);
-    float dist_pixels = texel_dist * pixels_per_texel;
-
-    // Border shadow (V3-measured): a soft dark gradient band ~8-15 px wide
-    // flanking the hairline on both sides, like a pressed paper seam.
-    out_ribbon = (1.0 - smoothstep(0.0, 12.0, dist_pixels));
-
-    // V3 hairline stroke: measured 1-3 px on official screenshots
-    float stroke = 1.0 - smoothstep(0.0, 1.1, dist_pixels);
-    return stroke;
+    float distance_px=(scores[first]-scores[second]) /
+                       max(length(gradients[first]-gradients[second]),1e-3)*pixels_per_texel;
+    // Solid country interiors; only the final subpixel edge is antialiased.
+    float coverage=0.5+0.5*smoothstep(0.0,0.75,distance_px);
+    out_pigment=srgb_to_linear(mix(colours[second].rgb,colours[first].rgb,coverage));
+    out_ribbon=1.0-smoothstep(0.0,12.0,distance_px);
+    return 1.0-smoothstep(0.0,1.1,distance_px);
 }
 
 // (location_border_smooth was deleted with the atlas: its only caller always
@@ -1297,7 +1278,7 @@ vec3 parchment_map(vec2 p, uint id, vec4 political, float land_mask, float coast
     // Solid political ink: no paper texture, terrain illumination or translucent
     // wash modifies a country's interior. Edge coverage remains antialiased.
     vec3 paper = srgb_to_linear(vec3(0.80, 0.84, 0.85));
-    vec3 printed_land = srgb_to_linear(political.rgb);
+    vec3 printed_land = pigment;
     vec3 colour = mix(paper, printed_land, land_mask);
     float coast_line = (1.0 - smoothstep(0.25, 1.25, abs(coast) * 0.5 / pixel_m)) *
                         (1.0 - smoothstep(28000.0, 31990.0, abs(coast)));

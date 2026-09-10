@@ -634,7 +634,11 @@ def _shared_border_length(a, b, tolerance_m=0.05):
     if a.distance(b) > tolerance_m:
         return 0.0
     if a.touches(b):
-        return float(a.boundary.intersection(b.boundary).length)
+        exact = float(a.boundary.intersection(b.boundary).length)
+        if exact > 1.0:
+            return exact
+        # One exact endpoint can make touches() true while the shared edge is
+        # displaced by a submillimetre CRS error. Continue the metric check.
     overlap = a.intersection(b)
     if overlap.area > 0.0 and not overlap.buffer(-tolerance_m).is_empty:
         return 0.0

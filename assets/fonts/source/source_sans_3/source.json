@@ -1,0 +1,11 @@
+{
+  "family": "Source Sans 3",
+  "weight": 600,
+  "style": "upright",
+  "source": "https://github.com/google/fonts/tree/main/ofl/sourcesans3",
+  "license": "SIL Open Font License 1.1",
+  "sha256": {
+    "SourceSans3-Semibold.ttf": "bd74a59bd5ebcb2513d5eac7049c7cc621b52f0123585abf66a900b83da36ed0",
+    "SourceSans3-Variable.ttf": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9"
+  }
+}

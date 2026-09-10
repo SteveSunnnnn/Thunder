@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "reference_url": "https://vic3.paradoxwikis.com/Victoria_3_Wiki",
+  "reference_image": "user-supplied Countries.png and read-only V3 1836 state-owner review",
+  "replaces_source_id": "DEU-3487",
+  "accuracy": "Independent district and geographic-control reconstruction of V3 opening polities; complete ownership, approximate fine boundaries.",
+  "locations": [
+    {
+      "key": "potsdam",
+      "name": "Potsdam",
+      "owner": "pru",
+      "districts": [
+        "Potsdam, Kreisfreie Stadt",
+        "Potsdam-Mittelmark"
+      ]
+    },
+    {
+      "key": "cottbus",
+      "name": "Cottbus",
+      "owner": "pru",
+      "districts": [
+        "Cottbus, Kreisfreie Stadt",
+        "Spree-Neiße"
+      ]
+    },
+    {
+      "key": "barnim",
+      "name": "Barnim",
+      "owner": "pru",
+      "districts": [
+        "Barnim"
+      ]
+    },
+    {
+      "key": "brandenburg_an_der_havel",
+      "name": "Brandenburg an der Havel",
+      "owner": "pru",
+      "districts": [
+        "Brandenburg an der Havel, Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "dahme_spreewald",
+      "name": "Dahme-Spreewald",
+      "owner": "pru",
+      "districts": [
+        "Dahme-Spreewald"
+      ]
+    },
+    {
+      "key": "elbe_elster",
+      "name": "Elbe-Elster",
+      "owner": "pru",
+      "districts": [
+        "Elbe-Elster"
+      ]
+    },
+    {
+      "key": "frankfurt_oder",
+      "name": "Frankfurt (Oder)",
+      "owner": "pru",
+      "districts": [
+        "Frankfurt (Oder), Kreisfreie Stadt"
+      ]
+    },
+    {
+      "key": "havelland",
+      "name": "Havelland",
+      "owner": "pru",
+      "districts": [
+        "Havelland"
+      ]
+    },
+    {
+      "key": "markisch_oderland",
+      "name": "Märkisch-Oderland",
+      "owner": "pru",
+      "districts": [
+        "Märkisch-Oderland"
+      ]
+    },
+    {
+      "key": "oberhavel",
+      "name": "Oberhavel",
+      "owner": "pru",
+      "districts": [
+        "Oberhavel"
+      ]
+    },
+    {
+      "key": "oberspreewald_lausitz",
+      "name": "Oberspreewald-Lausitz",
+      "owner": "pru",
+      "districts": [
+        "Oberspreewald-Lausitz"
+      ]
+    },
+    {
+      "key": "oder_spree",
+      "name": "Oder-Spree",
+      "owner": "pru",
+      "districts": [
+        "Oder-Spree"
+      ]
+    },
+    {
+      "key": "ostprignitz_ruppin",
+      "name": "Ostprignitz-Ruppin",
+      "owner": "pru",
+      "districts": [
+        "Ostprignitz-Ruppin"
+      ]
+    },
+    {
+      "key": "prignitz",
+      "name": "Prignitz",
+      "owner": "pru",
+      "districts": [
+        "Prignitz"
+      ]
+    },
+    {
+      "key": "teltow_flaming",
+      "name": "Teltow-Fläming",
+      "owner": "pru",
+      "districts": [
+        "Teltow-Fläming"
+      ]
+    },
+    {
+      "key": "uckermark",
+      "name": "Uckermark",
+      "owner": "pru",
+      "districts": [
+        "Uckermark"
+      ]
+    }
+  ]
+}

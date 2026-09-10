@@ -79,8 +79,12 @@ static void test_gpu_culling_pipeline_and_indirect_draws() {
         {.index_count = 50, .first_index = 450, .vertex_offset = 0}
     }};
 
-    const auto output = GpuCullingPipeline::cull_and_generate_draws(
+    const auto output = CpuVisibilityPipeline::cull_and_generate_draws(
         instances, 0.0, 0.0, camera, frustum, config, lod_meshes);
+    // Verify reference alias compatibility
+    const auto output_ref = GpuCullingReference::cull_and_generate_draws(
+        instances, 0.0, 0.0, camera, frustum, config, lod_meshes);
+    assert(output_ref.total_visible_instances == output.total_visible_instances);
 
     assert(output.total_visible_instances > 0);
     assert(output.total_culled_instances > 0);
@@ -101,7 +105,7 @@ static void test_gpu_culling_pipeline_and_indirect_draws() {
     assert(output.indirect_commands[2].first_instance == output.visible_instances_lod0.size() +
                                                          output.visible_instances_lod1.size());
 
-    std::cout << "[PASS] GPU-Driven culling pipeline and indirect draw generation\n";
+    std::cout << "[PASS] CPU visibility reference pipeline and indirect draw generation\n";
 }
 
 static void test_bindless_material_system() {

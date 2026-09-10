@@ -74,7 +74,11 @@ struct GpuCullingOutput {
     std::size_t total_visible_instances = 0;
 };
 
-class GpuCullingPipeline {
+// CPU visibility pipeline / reference implementation that performs frustum & distance culling,
+// assigns LOD bins, and emits VkDrawIndexedIndirectCommand structures.
+// Note: This is an explicit CPU reference implementation (GpuCullingReference).
+// Compute-driven GPU culling, compaction, and indirect-count will land in a future phase.
+class CpuVisibilityPipeline {
 public:
     [[nodiscard]] static GpuCullingOutput cull_and_generate_draws(
         std::span<const LivingInstanceGpu> instances,
@@ -85,5 +89,9 @@ public:
         const GpuCullingConfig& config,
         const std::array<LodMeshBinding, 3>& lod_meshes);
 };
+
+using GpuCullingReference = CpuVisibilityPipeline;
+// Deprecated alias for transitional compatibility
+using GpuCullingPipeline = CpuVisibilityPipeline;
 
 } // namespace thunder

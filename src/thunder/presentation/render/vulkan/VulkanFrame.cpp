@@ -47,6 +47,9 @@ void VulkanDesktopBackend::recreate_swapchain() {
 }
 
 void VulkanDesktopBackend::draw_frame() {
+    // VulkanFrame is the single authoritative source of truth for runtime frame
+    // barrier synchronization and pass execution. Synchronization2 pipeline
+    // barriers (VkImageMemoryBarrier2) are recorded explicitly for each render pass.
     // Interval since the previous frame is the number that maps to FPS.
     const auto now = std::chrono::steady_clock::now();
     double frame_ms = 0.0;

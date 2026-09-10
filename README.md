@@ -14,7 +14,7 @@ src/apps/       引擎命令行工具（编译器、烘焙器、检视器、编�
 shaders/        GLSL 源码，由 glslc 编译为 SPIR-V
 scripts/        GIS、资产烘焙、着色器、诊断与平台脚本
 cmake/          共享 CMake 模块
-tests/          27 个测试套件
+tests/          28 个测试套件
 bench/          性能基准
 docs/           架构与子系统文档
 assets/         字体源与已烘焙引擎资产

@@ -7,6 +7,18 @@
 
 namespace thunder {
 
+// -----------------------------------------------------------------------------
+// Synchronization and Scheduling Architecture Notice:
+// RenderGraph is a standalone DAG topological analyzer and hazard compiler
+// designed for static plan verification and future multi-queue frame
+// orchestration.
+//
+// In the current runtime, VulkanFrame (vulkan/VulkanFrame.cpp) is the single
+// authoritative source of truth for runtime frame scheduling, barrier insertion
+// (VkImageMemoryBarrier2), and command buffer recording. RenderGraph compiled
+// plans are not consumed directly by VulkanFrame at runtime.
+// -----------------------------------------------------------------------------
+
 enum class RenderQueue : std::uint8_t { Graphics, Compute, Transfer };
 enum class RenderResourceKind : std::uint8_t { Buffer, Image };
 enum class RenderUsage : std::uint8_t {

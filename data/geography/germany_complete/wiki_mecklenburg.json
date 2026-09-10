@@ -21,6 +21,29 @@
       "districts": [
         "Schwerin, Kreisfreie Stadt",
         "Ludwigslust-Parchim"
+      ],
+      "territory_controls": [
+        {
+          "key": "schwerin",
+          "name": "Schwerin",
+          "owner": "mec",
+          "lon": 11.419,
+          "lat": 53.634
+        },
+        {
+          "key": "ludwigslust",
+          "name": "Ludwigslust",
+          "owner": "mec",
+          "lon": 11.496,
+          "lat": 53.328
+        },
+        {
+          "key": "parchim",
+          "name": "Parchim",
+          "owner": "mec",
+          "lon": 11.848,
+          "lat": 53.426
+        }
       ]
     },
     {

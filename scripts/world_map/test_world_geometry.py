@@ -14,6 +14,7 @@ from bake_cartography import signed_chart_distance
 from refine_wiki_geography import partition, ocean_coast_flags, split_control_regions
 from compile_scenario import load_location_overrides
 from thunder_gis_compile import _shared_border_length, _representative_point
+from coarsen_germany import balanced_groups
 import json
 from pathlib import Path
 import tempfile
@@ -177,6 +178,26 @@ class ScenarioTests(unittest.TestCase):
 
 
 class RefinementTests(unittest.TestCase):
+    def test_consolidation_respects_owners_and_area_ceiling(self):
+        units=gpd.GeoDataFrame({'country_tag':['a','a','a','a','b'],
+                               'territory_code':['DEU']*5},
+            geometry=[box(i*20000,0,(i+1)*20000,20000) for i in range(5)],crs=3035)
+        groups=balanced_groups(units,target_area=900,maximum_area=1000,minimum_area=700,small_polity_area=0)
+        self.assertEqual(len(groups),3)
+        for members,mode in groups:
+            self.assertEqual(units.loc[list(members)].country_tag.nunique(),1)
+            self.assertLessEqual(units.loc[list(members)].geometry.area.sum()/1e6,1000)
+
+    def test_whole_small_polity_keeps_disconnected_exclave_geometry(self):
+        units=gpd.GeoDataFrame({'country_tag':['a','a'],'territory_code':['DEU','DEU']},
+                              geometry=[box(0,0,10000,10000),box(30000,0,40000,10000)],crs=3035)
+        groups=balanced_groups(units)
+        self.assertEqual(len(groups),1)
+        self.assertEqual(groups[0][1],'whole_small_polity')
+        geometry=unary_union(units.loc[list(groups[0][0])].geometry)
+        self.assertEqual(geometry.area,200e6)
+        self.assertFalse(geometry.covers(Point(20000,5000)))
+
     def test_territory_controls_cover_the_district_without_overlap(self):
         domain=box(0,0,1000,1000)
         controls=[{'key':'a','owner':'pru','lon':.002,'lat':.004},
@@ -212,6 +233,9 @@ class RefinementTests(unittest.TestCase):
         a = box(0,0,1000,1000)
         for delta in [-1e-7, 1e-7]:
             self.assertGreater(_shared_border_length(a, box(1000+delta,0,2000,1000)), 999)
+        one_endpoint = Polygon([(1000,0),(2000,0),(2000,1000),(1000+1e-7,1000)])
+        self.assertTrue(a.touches(one_endpoint))
+        self.assertGreater(_shared_border_length(a,one_endpoint),999)
         self.assertEqual(_shared_border_length(a, box(1001,0,2000,1000)), 0)
         self.assertEqual(_shared_border_length(a, box(500,0,1500,1000)), 0)
         self.assertLess(_shared_border_length(a, box(1000,1000,2000,2000)), 1)

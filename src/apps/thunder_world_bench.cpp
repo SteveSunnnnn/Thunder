@@ -22,12 +22,13 @@ int main(int argc, char** argv) {
         int frames = 240, width = 2560, height = 1440;
         float altitude = 10000000.0f, u = 0.5f, v = 0.5f;
         std::uint32_t shading_debug = 0u;
-        bool validation = false, exercise_politics = false, synthetic_ownership = false;
+        bool validation = false, exercise_politics = false, synthetic_ownership = false, location_labels = false;
         for (int i = 1; i < argc; ++i) {
             const std::string arg = argv[i];
             if (arg == "--validation") { validation = true; continue; }
             if (arg == "--exercise-politics") { exercise_politics = true; continue; }
             if (arg == "--synthetic-ownership") { synthetic_ownership = true; continue; }
+            if (arg == "--location-labels") { location_labels = true; continue; }
             if (i + 1 == argc) throw std::runtime_error("missing value for " + arg);
             const std::string value = argv[++i];
             if (arg == "--world") world = value;
@@ -97,8 +98,11 @@ int main(int argc, char** argv) {
             renderer.set_map_view(u, v, half_x, half_y, altitude, 90.0f);
             thunder::UiDrawList map_labels;
             std::vector<const thunder::WorldMapLabelRecord*> label_candidates;
-            for (const auto& label : topology.map_labels.records())
-                if (label.kind == thunder::WorldMapLabelKind::Country) label_candidates.push_back(&label);
+            for (const auto& label : topology.map_labels.records()) {
+                if ((!location_labels && label.kind == thunder::WorldMapLabelKind::Country) ||
+                    (location_labels && label.kind == thunder::WorldMapLabelKind::Location && label.key.starts_with("loc_deu_")))
+                    label_candidates.push_back(&label);
+            }
             std::sort(label_candidates.begin(), label_candidates.end(), [](auto a, auto b) {
                 return a->geographic_area_km2 > b->geographic_area_km2;
             });
@@ -114,8 +118,8 @@ int main(int argc, char** argv) {
                 const float dx = (b.u - a.u) / (2.0f * half_x) * static_cast<float>(width);
                 const float dy = (b.v - a.v) / (2.0f * half_y) * static_cast<float>(height);
                 const float available = std::hypot(dx, dy);
-                const float angle = std::atan2(dy, dx);
-                const float size = std::min(42.0f, available / std::max(1.0f, static_cast<float>(label->text.size()) * 0.65f));
+                const float angle = location_labels ? 0.0f : std::atan2(dy, dx);
+                const float size = location_labels ? 18.0f : std::min(42.0f, available / std::max(1.0f, static_cast<float>(label->text.size()) * 0.65f));
                 if (size < 13.0f || altitude < 3000.0f) continue;
                 const float text_width = size * static_cast<float>(label->text.size()) * 0.65f;
                 const float half_w = std::abs(std::cos(angle)) * text_width * 0.5f + std::abs(std::sin(angle)) * size * 0.7f;
@@ -125,7 +129,9 @@ int main(int argc, char** argv) {
                 if (std::any_of(placed.begin(), placed.end(), [&](const auto& old) {
                     return box.x0 < old.x1 + 5 && box.x1 + 5 > old.x0 && box.y0 < old.y1 + 5 && box.y1 + 5 > old.y0;
                 })) continue;
-                map_labels.map_text(label->text, sx, sy, size, 0xff10151bu, angle, size * 0.035f);
+                // UI vertices enter the linear HDR target; these low channel
+                // values display as opaque charcoal after sRGB conversion.
+                map_labels.map_text(label->text, sx, sy, size, 0xff030405u, angle, size * 0.035f);
                 placed.push_back(box);
             }
             renderer.submit_ui(map_labels);

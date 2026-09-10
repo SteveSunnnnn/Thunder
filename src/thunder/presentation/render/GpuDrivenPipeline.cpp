@@ -72,7 +72,7 @@ bool FrustumPlanes::intersects_box(float min_x, float min_y, float min_z,
     return true;
 }
 
-GpuCullingOutput GpuCullingPipeline::cull_and_generate_draws(
+GpuCullingOutput CpuVisibilityPipeline::cull_and_generate_draws(
     std::span<const LivingInstanceGpu> instances,
     double chunk_origin_x,
     double chunk_origin_y,

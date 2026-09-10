@@ -23,10 +23,13 @@ using JsonObject = std::map<std::string, JsonValue>;
 using JsonArray = std::vector<JsonValue>;
 struct JsonValue {
     std::variant<std::nullptr_t, bool, double, std::string, JsonArray, JsonObject> value;
+    [[nodiscard]] bool is_null() const noexcept { return std::holds_alternative<std::nullptr_t>(value); }
+    [[nodiscard]] bool is_boolean() const noexcept { return std::holds_alternative<bool>(value); }
     [[nodiscard]] bool is_object() const noexcept { return std::holds_alternative<JsonObject>(value); }
     [[nodiscard]] bool is_array() const noexcept { return std::holds_alternative<JsonArray>(value); }
     [[nodiscard]] bool is_string() const noexcept { return std::holds_alternative<std::string>(value); }
     [[nodiscard]] bool is_number() const noexcept { return std::holds_alternative<double>(value); }
+    [[nodiscard]] bool boolean() const { return std::get<bool>(value); }
     [[nodiscard]] const JsonObject& object() const { return std::get<JsonObject>(value); }
     [[nodiscard]] const JsonArray& array() const { return std::get<JsonArray>(value); }
     [[nodiscard]] const std::string& string() const { return std::get<std::string>(value); }
@@ -286,25 +289,24 @@ struct AccessorRegion {
 }
 
 template <class T>
-[[nodiscard]] T read_component(std::span<const std::byte> data, std::size_t offset,
-                               bool normalized) {
+[[nodiscard]] float read_component(std::span<const std::byte> data, std::size_t offset,
+                                   bool normalized) {
     T raw = 0;
     std::memcpy(&raw, data.data() + offset, sizeof(T));
-    if constexpr (std::is_same_v<T, float>) return raw;
-    if constexpr (std::is_same_v<T, std::uint8_t> || std::is_same_v<T, std::uint16_t> ||
-                  std::is_same_v<T, std::uint32_t>) {
-        if (normalized) {
-            const double max_value = static_cast<double>((std::numeric_limits<T>::max)());
-            return static_cast<T>(static_cast<double>(raw) / max_value);
-        }
+    if constexpr (std::is_same_v<T, float>) {
         return raw;
-    }
-    if constexpr (std::is_same_v<T, std::int8_t> || std::is_same_v<T, std::int16_t>) {
-        if (normalized) {
-            const double max_value = static_cast<double>((std::numeric_limits<T>::max)());
-            return static_cast<T>(static_cast<double>(raw) / max_value);
-        }
-        return raw;
+    } else if constexpr (std::is_same_v<T, std::uint8_t>) {
+        return normalized ? (static_cast<float>(raw) / 255.0f) : static_cast<float>(raw);
+    } else if constexpr (std::is_same_v<T, std::int8_t>) {
+        return normalized ? std::max(static_cast<float>(raw) / 127.0f, -1.0f) : static_cast<float>(raw);
+    } else if constexpr (std::is_same_v<T, std::uint16_t>) {
+        return normalized ? (static_cast<float>(raw) / 65535.0f) : static_cast<float>(raw);
+    } else if constexpr (std::is_same_v<T, std::int16_t>) {
+        return normalized ? std::max(static_cast<float>(raw) / 32767.0f, -1.0f) : static_cast<float>(raw);
+    } else if constexpr (std::is_same_v<T, std::uint32_t>) {
+        return normalized ? static_cast<float>(static_cast<double>(raw) / 4294967295.0) : static_cast<float>(raw);
+    } else {
+        return static_cast<float>(raw);
     }
 }
 
@@ -314,30 +316,16 @@ struct ComponentReader {
     std::size_t stride = 0;
     int component_type = 0;
     bool normalized = false;
+    std::size_t count = 0;
 
     [[nodiscard]] float scalar(std::size_t element, std::size_t component) const {
         const auto offset = element * stride + component * component_size;
         switch (component_type) {
-        case 5120: { // byte
-            const auto v = read_component<std::int8_t>(data, offset, normalized);
-            return static_cast<float>(v);
-        }
-        case 5121: { // unsigned byte
-            const auto v = read_component<std::uint8_t>(data, offset, normalized);
-            return static_cast<float>(v);
-        }
-        case 5122: { // short
-            const auto v = read_component<std::int16_t>(data, offset, normalized);
-            return static_cast<float>(v);
-        }
-        case 5123: { // unsigned short
-            const auto v = read_component<std::uint16_t>(data, offset, normalized);
-            return static_cast<float>(v);
-        }
-        case 5125: { // unsigned int
-            const auto v = read_component<std::uint32_t>(data, offset, normalized);
-            return static_cast<float>(v);
-        }
+        case 5120: return read_component<std::int8_t>(data, offset, normalized);
+        case 5121: return read_component<std::uint8_t>(data, offset, normalized);
+        case 5122: return read_component<std::int16_t>(data, offset, normalized);
+        case 5123: return read_component<std::uint16_t>(data, offset, normalized);
+        case 5125: return read_component<std::uint32_t>(data, offset, normalized);
         case 5126: return read_component<float>(data, offset, normalized);
         default: throw std::runtime_error("glTF unsupported component type");
         }
@@ -391,8 +379,15 @@ struct ComponentReader {
     default: throw std::runtime_error("glTF unsupported component type");
     }
     const auto region = accessor_data(ctx, accessor, component_size, components);
+    const auto count = static_cast<std::size_t>(accessor.at("count").number());
+    bool normalized = false;
+    if (accessor.contains("normalized")) {
+        const auto& norm = accessor.at("normalized");
+        if (norm.is_boolean()) normalized = norm.boolean();
+        else if (norm.is_number()) normalized = norm.number() != 0.0;
+    }
     return ComponentReader{region.data, component_size, region.stride, component_type,
-                           accessor.contains("normalized") && accessor.at("normalized").number() != 0.0};
+                           normalized, count};
 }
 
 } // namespace
@@ -423,14 +418,14 @@ std::vector<MeshGeometry> import_glb_meshes(std::span<const std::byte> glb_bytes
 
             const auto position_reader = make_accessor_reader(ctx, static_cast<std::size_t>(attributes.at("POSITION").number()), 3u);
             const auto base_vertex = geometry.vertex_count();
-            const auto primitive_vertices = position_reader.data.size() / position_reader.stride;
+            const auto primitive_vertices = position_reader.count;
             for (std::size_t i = 0; i < primitive_vertices; ++i) {
                 for (std::size_t c = 0; c < 3u; ++c)
                     geometry.positions.push_back(position_reader.scalar(i, c));
             }
             if (attributes.contains("NORMAL")) {
                 const auto normal_reader = make_accessor_reader(ctx, static_cast<std::size_t>(attributes.at("NORMAL").number()), 3u);
-                const auto normal_count = normal_reader.data.size() / normal_reader.stride;
+                const auto normal_count = normal_reader.count;
                 if (normal_count != primitive_vertices)
                     throw std::runtime_error("glTF NORMAL count does not match POSITION");
                 // When concatenating primitives, pad earlier vertices with up.
@@ -446,7 +441,7 @@ std::vector<MeshGeometry> import_glb_meshes(std::span<const std::byte> glb_bytes
             }
             if (attributes.contains("TEXCOORD_0")) {
                 const auto uv_reader = make_accessor_reader(ctx, static_cast<std::size_t>(attributes.at("TEXCOORD_0").number()), 2u);
-                const auto uv_count = uv_reader.data.size() / uv_reader.stride;
+                const auto uv_count = uv_reader.count;
                 if (uv_count != primitive_vertices)
                     throw std::runtime_error("glTF TEXCOORD_0 count does not match POSITION");
                 if (geometry.uvs.size() < static_cast<std::size_t>(base_vertex) * 2u)
@@ -458,7 +453,7 @@ std::vector<MeshGeometry> import_glb_meshes(std::span<const std::byte> glb_bytes
             }
             if (!primitive.contains("indices")) throw std::runtime_error("glTF primitive without indices");
             const auto index_reader = make_accessor_reader(ctx, static_cast<std::size_t>(primitive.at("indices").number()), 1u);
-            const auto index_count = index_reader.data.size() / index_reader.stride;
+            const auto index_count = index_reader.count;
             for (std::size_t i = 0; i < index_count; ++i)
                 geometry.indices.push_back(base_vertex + index_reader.uint_scalar(i));
         }

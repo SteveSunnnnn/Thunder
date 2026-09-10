@@ -92,7 +92,8 @@ def main():
         'Vorpommern-Greifswald':'pru','Vorpommern-Rügen':'pru'},
         [('rostock','Rostock','mec',['Rostock, Kreisfreie Stadt','Landkreis Rostock']),
          ('schwerin','Schwerin','mec',['Schwerin, Kreisfreie Stadt','Ludwigslust-Parchim'])],
-        {'nordwestmecklenburg':[control('wismar','mec',11.465,53.89),control('schoenberg','mst',10.935,53.85)],
+        {'schwerin':[control('schwerin','mec',11.419,53.634),control('ludwigslust','mec',11.496,53.328),control('parchim','mec',11.848,53.426)],
+         'nordwestmecklenburg':[control('wismar','mec',11.465,53.89),control('schoenberg','mst',10.935,53.85)],
          'mecklenburgische_seenplatte':[control('waren','mec',12.687,53.522),control('neustrelitz','mst',13.064,53.362),control('neubrandenburg','mst',13.262,53.557)]})
     region('DEU-1600','wiki_anhalt.json','pru',
         [('magdeburg','Magdeburg','pru',['Magdeburg, Kreisfreie Stadt','Börde']),
@@ -140,6 +141,9 @@ def main():
     groups=[(safe_key(stem,'bav').replace('.','_'),stem,'cob' if stem=='Coburg' else 'bav',members)
             for stem,members in stems.items() if len(members)>1]
     region('DEU-1591','wiki_bavaria.json',{n:('cob' if n.startswith('Coburg,') else 'bav') for n in bavarian_names},groups)
+    region('DEU-3487','wiki_brandenburg.json','pru',
+        [('potsdam','Potsdam','pru',['Potsdam, Kreisfreie Stadt','Potsdam-Mittelmark']),
+         ('cottbus','Cottbus','pru',['Cottbus, Kreisfreie Stadt','Spree-Neiße'])])
     # Ensure every requested control actually matched a generated key.
     for path in OUT.glob('*.json'):
         data=json.loads(path.read_text(encoding='utf-8'))

@@ -50,7 +50,7 @@ WSI acquire/present still uses the synchronization primitives required by the pl
 - a conservative transition/barrier plan,
 - cross-queue transition markers.
 
-The future Vulkan backend maps `RenderUsage` to Synchronization2 stage/access/layout tuples.
+`RenderGraph` serves as the compile-time DAG planner for multi-pass hazard analysis and static verification; in the current desktop renderer, `VulkanFrame` is the authoritative source of truth for runtime frame synchronization, recording explicit `VkImageMemoryBarrier2` transitions via Synchronization2.
 
 ## 7. Runtime world is data-oriented
 
@@ -71,14 +71,12 @@ created, establishing a topological insertion order.
 
 ## 10. Tick graph is parallel-ready but deterministic-first
 
-`TickScheduler::compile()` emits topological waves. 0.2 still executes sequentially. The worker
-system will later schedule each due wave concurrently, but world mutation/reduction rules must be
-explicit so parallel execution cannot alter deterministic results.
+`TickScheduler::compile()` emits topological waves. Tasks execute either sequentially via `run_due()` or concurrently across worker threads via `run_due_parallel()` with `JobSystem`. World mutation/reduction rules remain explicit so parallel execution cannot alter deterministic results.
 
 ## 11. Budgets are enforced with telemetry
 
 Renderer telemetry records frame number, CPU/GPU/submit time, draw/dispatch counts, triangles and
-uploaded bytes. Simulation will receive equivalent per-task tick telemetry before 0.7.
+uploaded bytes. Simulation records per-task tick telemetry and worker utilization via `TickExecutionProfile` and `JobDispatchStats`.
 
 ## 12. No object-per-map-feature architecture
 

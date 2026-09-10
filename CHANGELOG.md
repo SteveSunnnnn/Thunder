@@ -142,9 +142,12 @@ bankruptcy is added. All items verified by 28/28 suites in both build configs.
   with `.glb` sources are now imported and baked into the quantized layout
   instead of being stored as opaque bytes.
 - Tests: new `thunder_mesh_pipeline_tests` suite (28 suites total) covering
-  synthetic-glb import, malformed-container rejection, octahedral normal
-  round-trip accuracy, quantized encode/decode fidelity, and the full
-  glb → cook → AssetPack → read → decode path.
+  synthetic-glb import, malformed-container rejection, normalized accessor
+  decoding across UNORM8/SNORM8/UNORM16/SNORM16, real interleaved-view
+  byteStride with non-zero accessorOffset, multi-primitive concatenation with
+  base-vertex rebasing, octahedral normal round-trip accuracy, quantized
+  encode/decode fidelity, and the full glb → cook → AssetPack → read → decode
+  path.
 
 ## Thunder 1.0 Development — Natural population growth driven by standard of living — 2026-09-06
 
