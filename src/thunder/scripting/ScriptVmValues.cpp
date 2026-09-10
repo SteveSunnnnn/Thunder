@@ -279,7 +279,9 @@ double ScriptVm::eval_value_bytecode(const ScriptValueBytecode& bytecode,
                     const double max_val = stack.back(); stack.pop_back();
                     const double min_val = stack.back(); stack.pop_back();
                     const double val = stack.back(); stack.pop_back();
-                    stack.push_back(std::clamp(val, min_val, max_val));
+                    const double lo = std::min(min_val, max_val);
+                    const double hi = std::max(min_val, max_val);
+                    stack.push_back(std::clamp(val, lo, hi));
                 }
                 break;
             default:

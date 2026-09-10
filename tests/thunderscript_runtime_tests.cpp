@@ -217,6 +217,19 @@ void test_parameterized_calls_event_targets_variables_and_values() {
     assert(std::abs(vm.evaluate_value(symbols.find("nested_value"), fixture.world, context,
                                       value_arguments) - 27.0) < 1e-9);
 
+    // Test ScriptValueOp::Clamp with inverted min/max bounds (ensures safe ordering)
+    ScriptedValueProgram clamp_prog;
+    clamp_prog.scope = ScopeType::Country;
+    clamp_prog.uses_bytecode = true;
+    clamp_prog.bytecode.ops = {
+        ScriptValueOp::PushConst,
+        ScriptValueOp::PushConst,
+        ScriptValueOp::PushConst,
+        ScriptValueOp::Clamp
+    };
+    clamp_prog.bytecode.const_pool = {50.0, 100.0, 10.0}; // val=50, min_val=100, max_val=10 (inverted)
+    assert(std::abs(vm.evaluate(clamp_prog, fixture.world, context) - 50.0) < 1e-9);
+
     const auto* value_gate = programs.find_script(symbols.find("value_gate"));
     assert(value_gate != nullptr);
     assert(vm.evaluate(*value_gate, fixture.world, context));

@@ -259,7 +259,9 @@ CurvedLabelLayout VectorMapTypography::layout_curved_label(std::string text,
         max_y = std::max(max_y, g.y + font_size * 0.5f);
     }
 
-    layout.aabb = {min_x, min_y, std::max(1.0f, max_x - min_x), std::max(1.0f, max_y - min_y)};
+    layout.aabb = layout.glyphs.empty()
+        ? UiRect{}
+        : UiRect{min_x, min_y, std::max(1.0f, max_x - min_x), std::max(1.0f, max_y - min_y)};
     return layout;
 }
 

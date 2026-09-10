@@ -42,7 +42,7 @@ void StateRegionIndex::rebuild(const GeographyStore& geography) {
         if (region.valid() && region.value() < keys_.size()) ++state_offsets_[region.value() + 1u];
     }
     for (std::size_t i = 1; i < state_offsets_.size(); ++i) state_offsets_[i] += state_offsets_[i - 1u];
-    states_.assign(state_regions_.size(), StateId{});
+    states_.assign(state_offsets_.back(), StateId{});
     auto state_write = state_offsets_;
     for (std::size_t i = 0; i < state_regions_.size(); ++i) {
         const auto region = state_regions_[i];

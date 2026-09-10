@@ -1,6 +1,7 @@
 #include "thunder/presentation/render/map/VectorMapPipeline.hpp"
 #include "thunder/presentation/render/map/VectorMapTypography.hpp"
 #include "thunder/presentation/render/flag/DynamicFlag3D.hpp"
+#include "thunder/presentation/render/PhysicalLighting.hpp"
 #include "thunder/presentation/render/water/PhysicalWaterPass.hpp"
 #include "thunder/simulation/world/WorldMapLabels.hpp"
 #include "thunder/presentation/ui/StrategyUi.hpp"
@@ -293,7 +294,32 @@ int main() {
             assert(d <= 0.050f && "Adjacent glyph angles must be smoothly constrained without jagged twists");
         }
 
+        // 6c. Test layout_curved_label with empty text returns clean zeroed AABB (no degenerate bounds)
+        auto empty_layout = VectorMapTypography::layout_curved_label("", anchors, 16.0f, 0xff000000u, 1);
+        assert(empty_layout.glyphs.empty());
+        assert(empty_layout.aabb.x == 0.0f && empty_layout.aabb.y == 0.0f);
+        assert(empty_layout.aabb.w == 0.0f && empty_layout.aabb.h == 0.0f);
+
         std::cout << "  [PASS] VectorMapTypography Catmull-Rom spline, smooth curvature, and engraved label layout\n";
+    }
+
+    // 7. PhysicalLighting Mat4::ortho degenerate bounds and split safety
+    {
+        // Degenerate left == right, bottom == top, or near == far must return safe zeros without NaNs or Infs
+        Mat4 degenerate = Mat4::ortho(10.0f, 10.0f, 0.0f, 10.0f, 0.1f, 100.0f);
+        for (float val : degenerate.m) {
+            assert(std::isfinite(val));
+        }
+
+        // Cascaded shadow map split calculation with zero near plane
+        auto splits = CascadedShadowMaps::calculate_splits(0.0f, 100.0f, 0.5f, {0, -1, 0}, Mat4::identity());
+        for (const auto& split : splits) {
+            assert(split.far_dist > 0.0f);
+            for (float val : split.light_view_proj.m) {
+                assert(std::isfinite(val));
+            }
+        }
+        std::cout << "  [PASS] PhysicalLighting Mat4::ortho degenerate bounds and cascade safety\n";
     }
 
     std::cout << "=== ALL VECTOR MAP AND UI TESTS PASSED (100%) ===\n";

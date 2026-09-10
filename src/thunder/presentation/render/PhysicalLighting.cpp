@@ -7,12 +7,18 @@ namespace thunder {
 
 Mat4 Mat4::ortho(float left, float right, float bottom, float top, float near_val, float far_val) noexcept {
     Mat4 res{};
-    res.m[0] = 2.0f / (right - left);
-    res.m[5] = 2.0f / (top - bottom);
-    res.m[10] = -2.0f / (far_val - near_val);
-    res.m[12] = -(right + left) / (right - left);
-    res.m[13] = -(top + bottom) / (top - bottom);
-    res.m[14] = -(far_val + near_val) / (far_val - near_val);
+    const float dx = right - left;
+    const float dy = top - bottom;
+    const float dz = far_val - near_val;
+    if (std::abs(dx) < 1e-6f || std::abs(dy) < 1e-6f || std::abs(dz) < 1e-6f) {
+        return res;
+    }
+    res.m[0] = 2.0f / dx;
+    res.m[5] = 2.0f / dy;
+    res.m[10] = -2.0f / dz;
+    res.m[12] = -(right + left) / dx;
+    res.m[13] = -(top + bottom) / dy;
+    res.m[14] = -(far_val + near_val) / dz;
     res.m[15] = 1.0f;
     return res;
 }
@@ -27,7 +33,7 @@ std::array<CascadeSplit, CascadedShadowMaps::cascade_count> CascadedShadowMaps::
         const float p = static_cast<float>(i + 1) / static_cast<float>(cascade_count);
         const float log_split = camera_near * std::pow(ratio, p);
         const float uniform_split = camera_near + (camera_far - camera_near) * p;
-        const float split_dist = lambda * log_split + (1.0f - lambda) * uniform_split;
+        const float split_dist = std::max(1e-3f, lambda * log_split + (1.0f - lambda) * uniform_split);
 
         splits[i].near_dist = (i == 0) ? camera_near : splits[i - 1].far_dist;
         splits[i].far_dist = split_dist;
