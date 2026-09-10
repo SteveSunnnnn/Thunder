@@ -73,7 +73,10 @@ Vec3 BorderMesh3D::evaluate_border_pixel_shading(
     if (abs_u >= 1.0f) return Vec3{0.0f, 0.0f, 0.0f};
 
     // Thunder solid line + soft outer glow falloff
-    const float thunder_line = 1.0f - std::clamp((abs_u - border_fade_start) / (1.0f - border_fade_start), 0.0f, 1.0f);
+    const float denom = 1.0f - border_fade_start;
+    const float thunder_line = denom > 1e-4f
+        ? 1.0f - std::clamp((abs_u - border_fade_start) / denom, 0.0f, 1.0f)
+        : (abs_u < border_fade_start ? 1.0f : 0.0f);
     const float glow = std::exp(-abs_u * abs_u * 3.5f);
 
     float intensity = thunder_line * 0.8f + glow * 0.4f;

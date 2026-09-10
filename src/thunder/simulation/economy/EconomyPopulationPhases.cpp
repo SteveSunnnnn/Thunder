@@ -57,6 +57,7 @@ JobDispatchStats EconomySystem::population_growth(World& world) {
     const auto sols = world.pops.sol_all();
 
     for (std::size_t i = 0; i < populations.size(); ++i) {
+        if (!world.pops.slot_pool().is_index_alive(static_cast<std::uint32_t>(i))) continue;
         const auto sol = static_cast<std::int64_t>(sols[i]);
 
         // Mortality responds immediately to living standards.

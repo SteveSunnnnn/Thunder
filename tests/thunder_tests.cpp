@@ -612,6 +612,14 @@ static void test_strategic_camera_precision_and_zoom() {
     assert(camera.state().altitude_m == game_min_altitude);
     assert(camera.state().center.x == center_at_close_limit.x);
     assert(camera.state().center.y == center_at_close_limit.y);
+
+    // zoom_fraction is strictly in [0.0, 1.0] and safe against out-of-bound altitudes
+    const double zf = camera.zoom_fraction();
+    assert(zf >= 0.0 && zf <= 1.0);
+    camera.state().altitude_m = -1000.0;
+    assert(camera.zoom_fraction() == 0.0);
+    camera.state().altitude_m = 1e12;
+    assert(camera.zoom_fraction() == 1.0);
 }
 
 static void test_terrain_clipmap_compact_stable_build() {

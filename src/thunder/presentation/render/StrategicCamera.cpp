@@ -71,7 +71,8 @@ void StrategicCamera::zoom_steps(double steps,
 double StrategicCamera::zoom_fraction() const noexcept {
     const double log_min = std::log(min_altitude_m);
     const double log_max = std::log(max_altitude_m);
-    return (std::log(state_.altitude_m) - log_min) / (log_max - log_min);
+    const double alt = std::clamp(state_.altitude_m, min_altitude_m, max_altitude_m);
+    return (std::log(alt) - log_min) / (log_max - log_min);
 }
 
 void StrategicCamera::clamp() noexcept {

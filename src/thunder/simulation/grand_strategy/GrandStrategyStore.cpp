@@ -339,11 +339,14 @@ void GrandStrategyStore::enforce_peace_treaty(DiplomaticPlayId play, CountryId w
             if (goal.goal_type == WarGoalType::ConquerState && goal.state_target.valid() && world != nullptr) {
                 // 1. Transfer state ownership to winner
                 world->geography.set_state_owner(goal.state_target, winner);
-                // 2. Transfer all province ownership in the state to winner
+                // 2. Transfer province ownership in the state to winner (only if owned by loser or unowned)
                 const auto prov_states = world->geography.province_states();
+                const auto prov_owners = world->geography.province_owners();
                 for (std::size_t pi = 0; pi < prov_states.size(); ++pi) {
                     if (prov_states[pi] == goal.state_target) {
-                        world->geography.set_province_owner(ProvinceId{static_cast<ProvinceId::rep_type>(pi)}, winner);
+                        if (pi >= prov_owners.size() || prov_owners[pi] == loser || !prov_owners[pi].valid()) {
+                            world->geography.set_province_owner(ProvinceId{static_cast<ProvinceId::rep_type>(pi)}, winner);
+                        }
                     }
                 }
                 // 3. Set occupation resistance in conquered state
@@ -373,7 +376,7 @@ void GrandStrategyStore::run_naval_weekly() {
         auto& zone = sea_zones_[zi];
         std::uint64_t blockade_power = 0u;
         for (const auto& navy : navys_) {
-            if (navy.assigned_zone.value() == zi && navy.mission == NavalMission::BlockadePort) {
+            if (navy.assigned_zone.valid() && navy.assigned_zone.value() == zi && navy.mission == NavalMission::BlockadePort) {
                 blockade_power += (static_cast<std::uint64_t>(navy.sailors) * static_cast<std::uint64_t>(navy.strength_ppm)) / 1'000'000u;
             }
         }

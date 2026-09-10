@@ -216,10 +216,12 @@ std::uint32_t WorldMapPageStreamer::resident_count() const noexcept {
 }
 
 float WorldMapPageStreamer::lod_fraction(std::array<float, 4> map_view, float screen_width_px) {
+    if (screen_width_px <= 0.0f) return 0.0f;
     const float half_u = std::clamp(map_view[2], 1.0e-6f, 1.0f);
     const float page0_px = (1.0f / 40.0f) * screen_width_px / (2.0f * half_u);
-    const float quad0_px = page0_px / 64.0f;
-    return std::clamp(-std::log2(quad0_px / 2.5f), 0.0f, 3.0f);
+    const float quad0_px = std::max(1.0e-6f, page0_px / 64.0f);
+    const float raw_lod = -std::log2(quad0_px / 2.5f);
+    return std::isfinite(raw_lod) ? std::clamp(raw_lod, 0.0f, 3.0f) : 0.0f;
 }
 
 void WorldMapPageStreamer::build_world_patches(std::array<float, 4> map_view,
@@ -239,9 +241,13 @@ void WorldMapPageStreamer::build_world_patches(std::array<float, 4> map_view,
 
     const auto& layout = kWorldLevels[fine];
     const auto& metadata = source_.metadata();
+    const double span_x = metadata.bounds_world_m[2] - metadata.bounds_world_m[0];
+    const double span_y = metadata.bounds_world_m[3] - metadata.bounds_world_m[1];
+    if (span_x <= 0.0 || span_y <= 0.0) return;
     const double page_m = metadata.base_page_world_size_m * static_cast<double>(1u << fine);
-    const float page_u = static_cast<float>(page_m / (metadata.bounds_world_m[2] - metadata.bounds_world_m[0]));
-    const float page_v = static_cast<float>(page_m / (metadata.bounds_world_m[3] - metadata.bounds_world_m[1]));
+    const float page_u = static_cast<float>(page_m / span_x);
+    const float page_v = static_cast<float>(page_m / span_y);
+    if (page_u <= 1.0e-6f || page_v <= 1.0e-6f) return;
     const float north_padding = static_cast<float>(layout.rows) * page_v - 1.0f;
     // x deliberately over-covers by a page in both directions so the wrap seam
     // always has a patch on each side; keys normalise back into the level.

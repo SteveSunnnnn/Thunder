@@ -736,7 +736,12 @@ JobDispatchStats EconomySystem::settlement(World& world, JobSystem& jobs) {
                 }
             } else {
                 // Insolvent: enter sovereign default
-                world.countries.set_default_weeks(country, world.countries.default_weeks(country) + 1);
+                const auto current_def = world.countries.default_weeks(country);
+                if (current_def < 4) {
+                    world.countries.set_default_weeks(country, current_def + 1);
+                } else {
+                    world.countries.set_default_weeks(country, 52);
+                }
                 world.countries.set_credit_rating(country, CreditRating::D);
                 world.countries.add_prestige(country, -5.0);
                 // R8: restructuring after a month of missed service. The debt
@@ -745,7 +750,7 @@ JobDispatchStats EconomySystem::settlement(World& world, JobSystem& jobs) {
                 // crisis channel), the saver pool absorbs the rest via its
                 // cash. The exclusion clock resets to a year; each fully
                 // serviced week counts it back down.
-                if (world.countries.default_weeks(country) >= 4) {
+                if (current_def + 1 == 4) {
                     constexpr std::int32_t kWriteOffPpm = 300'000;
                     const auto debt = world.countries.national_debt_milli(country);
                     const auto write_off = mul_div_nonnegative(debt, kWriteOffPpm, ppm_scale);

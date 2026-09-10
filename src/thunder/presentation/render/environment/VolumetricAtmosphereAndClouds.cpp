@@ -76,6 +76,9 @@ SkyAtmosphereOutput VolumetricAtmosphereAndClouds::compute_sky_environment(
 
 float VolumetricAtmosphereAndClouds::evaluate_cloud_density(
     float world_x, float world_y, float time_s, float coverage) noexcept {
+    const float cov = std::clamp(coverage, 0.0f, 1.0f);
+    if (cov <= 1e-4f) return 0.0f;
+
     // Cloud coordinate with wind translation
     const float scale = 0.00015f; // Continental cloud scale
     const float u = world_x * scale + time_s * 0.005f;
@@ -83,10 +86,10 @@ float VolumetricAtmosphereAndClouds::evaluate_cloud_density(
 
     const float fbm = fractal_cloud_fbm(u, v);
     // Threshold with coverage
-    const float threshold = 1.0f - coverage;
+    const float threshold = 1.0f - cov;
     if (fbm <= threshold) return 0.0f;
 
-    const float density = (fbm - threshold) / (1.0f - threshold);
+    const float density = (fbm - threshold) / cov;
     return std::clamp(density * density, 0.0f, 1.0f);
 }
 

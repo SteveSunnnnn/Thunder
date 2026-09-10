@@ -2,6 +2,8 @@
 #include "thunder/presentation/render/map/VectorMapTypography.hpp"
 #include "thunder/presentation/render/flag/DynamicFlag3D.hpp"
 #include "thunder/presentation/render/PhysicalLighting.hpp"
+#include "thunder/presentation/render/environment/VolumetricAtmosphereAndClouds.hpp"
+#include "thunder/presentation/render/map/BorderMesh3D.hpp"
 #include "thunder/presentation/render/water/PhysicalWaterPass.hpp"
 #include "thunder/simulation/world/WorldMapLabels.hpp"
 #include "thunder/presentation/ui/StrategyUi.hpp"
@@ -111,6 +113,23 @@ int main() {
         float foam_near = PhysicalWaterEvaluator::evaluate_coast_foam(1.0f, 0.5f, 15.0f);
         float foam_far = PhysicalWaterEvaluator::evaluate_coast_foam(16.0f, 0.5f, 15.0f);
         assert(foam_near > 0.0f && foam_far == 0.0f);
+
+        // Robustness: zero-amplitude wave must not divide by zero or produce NaN
+        std::vector<GerstnerWave> zero_waves{{1.0f, 0.0f, 0.0f, 80.0f, 1.5f, 0.6f}};
+        Vector3D zero_disp = PhysicalWaterEvaluator::evaluate_displacement(10.0f, 20.0f, 5.0f, zero_waves);
+        assert(std::isfinite(zero_disp.x) && std::isfinite(zero_disp.y) && std::isfinite(zero_disp.z));
+        assert(zero_disp.x == 10.0f && zero_disp.y == 20.0f && zero_disp.z == 0.0f);
+
+        // Volumetric cloud density at 0% and 100% coverage must not divide by zero
+        float cloud_clear = VolumetricAtmosphereAndClouds::evaluate_cloud_density(100.0f, 200.0f, 1.0f, 0.0f);
+        assert(std::isfinite(cloud_clear) && cloud_clear == 0.0f);
+        float cloud_overcast = VolumetricAtmosphereAndClouds::evaluate_cloud_density(100.0f, 200.0f, 1.0f, 1.0f);
+        assert(std::isfinite(cloud_overcast) && cloud_overcast >= 0.0f && cloud_overcast <= 1.0f);
+
+        // Border mesh shading at border_fade_start = 1.0 must not divide by zero
+        Vec3 border_color = BorderMesh3D::evaluate_border_pixel_shading(
+            0.5f, 10.0f, Vec3{1.0f, 0.0f, 0.0f}, 0.0f, false, 1.0f);
+        assert(std::isfinite(border_color.x) && std::isfinite(border_color.y) && std::isfinite(border_color.z));
 
         std::cout << "  [PASS] PhysicalWaterEvaluator Gerstner waves, Fresnel, and Beer-Lambert\n";
     }

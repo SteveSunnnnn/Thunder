@@ -550,6 +550,33 @@ void test_civilian_war_casualties_and_continuous_reinforcements() {
     assert(treasury_after < 100'000LL * 1000LL);
 }
 
+void test_peace_treaty_preserves_third_party_provinces() {
+    World world;
+    const auto winner = world.countries.create({"WIN", 10'000.0, 100.0, 10'000.0, 0.2});
+    const auto loser = world.countries.create({"LOS", 10'000.0, 100.0, 10'000.0, 0.2});
+    const auto third_party = world.countries.create({"THI", 10'000.0, 100.0, 10'000.0, 0.2});
+    const MarketId market{0u};
+
+    const auto state = world.geography.create_state({"SplitState", loser, market, ProvinceId{0u}});
+    const auto prov0 = world.geography.create_province({"P0", state, loser, market, 0.0, 0.0, 500});
+    const auto prov1 = world.geography.create_province({"P1_ThirdParty", state, third_party, market, 1.0, 0.0, 500});
+    const auto prov2 = world.geography.create_province({"P2", state, loser, market, 2.0, 0.0, 500});
+    world.geography.set_state_capital(state, prov0);
+
+    const auto play = world.grand_strategy.start_diplomatic_play(winner, loser, 0x5045u);
+    world.grand_strategy.add_war_goal({play, winner, loser, WarGoalType::ConquerState, state, false, false});
+
+    world.grand_strategy.enforce_peace_treaty(play, winner, loser, &world);
+
+    // Conquered state ownership transfers to winner
+    assert(world.geography.state_owner(state) == winner);
+    // Loser's provinces transfer to winner
+    assert(world.geography.province_owner(prov0) == winner);
+    assert(world.geography.province_owner(prov2) == winner);
+    // Third-party's province in the split state MUST NOT be ceded!
+    assert(world.geography.province_owner(prov1) == third_party);
+}
+
 } // namespace
 
 int main() {
@@ -566,6 +593,7 @@ int main() {
     test_frontline_tactics_and_commanders();
     test_naval_warfare_and_sea_zone_blockades();
     test_civilian_war_casualties_and_continuous_reinforcements();
+    test_peace_treaty_preserves_third_party_provinces();
     std::cout << "Thunder 1.0 strategy system tests: PASS\n";
     return 0;
 }

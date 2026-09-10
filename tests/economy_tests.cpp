@@ -538,6 +538,32 @@ static void test_sovereign_restructuring_writes_down_debt() {
     assert(world.banks.balance_sheet_balanced(bank));
     assert(world.countries.default_weeks(country) == 52); // a year of exile
     assert(world.countries.credit_rating(country) == CreditRating::D);
+
+    // Week 5 and 6: still insolvent. The 52-week exclusion resets or holds,
+    // but the 30% restructuring must NOT trigger repeatedly every week!
+    economy.run_weekly(world, jobs);
+    assert(world.countries.national_debt_milli(country) == 700'000);
+    assert(world.banks.bank(bank).sovereign_bonds_milli == 700'000);
+    assert(world.countries.default_weeks(country) == 52);
+
+    economy.run_weekly(world, jobs);
+    assert(world.countries.national_debt_milli(country) == 700'000);
+    assert(world.banks.bank(bank).sovereign_bonds_milli == 700'000);
+    assert(world.countries.default_weeks(country) == 52);
+}
+
+static void test_population_growth_skips_dead_pop_slots() {
+    auto f = make_fixture(1u, 1u, 3u, 1000u);
+    EconomySystem economy{f.definitions};
+    const PopId dead_pop{1u};
+    f.world.pops.destroy(dead_pop);
+    assert(!f.world.pops.slot_pool().is_index_alive(dead_pop.value()));
+    assert(f.world.pops.populations()[dead_pop.value()] == 0u);
+
+    // Run population growth: the dead POP slot must NOT resurrect to 1 person!
+    economy.population_growth(f.world);
+    assert(!f.world.pops.slot_pool().is_index_alive(dead_pop.value()));
+    assert(f.world.pops.populations()[dead_pop.value()] == 0u);
 }
 
 static void test_bankrupt_building_downsizes_and_dies_on_debt_failure() {
@@ -1450,6 +1476,7 @@ int main() {
     test_construction_consumes_materials();
     test_investment_pool_expansion_queues_project();
     test_sovereign_restructuring_writes_down_debt();
+    test_population_growth_skips_dead_pop_slots();
     test_bankrupt_building_downsizes_and_dies_on_debt_failure();
     test_company_receives_ownership_dividends();
     test_inventory_carry_cost_is_audited_sink();

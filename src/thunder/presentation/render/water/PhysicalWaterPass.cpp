@@ -19,7 +19,8 @@ Vector3D PhysicalWaterEvaluator::evaluate_displacement(float x, float y, float t
         const float phase = k * (dx * x + dy * y) - c * k * time_s;
         const float cos_p = std::cos(phase);
         const float sin_p = std::sin(phase);
-        const float q = w.steepness / (k * w.amplitude * static_cast<float>(waves.size()));
+        const float denom = k * w.amplitude * static_cast<float>(waves.size());
+        const float q = denom > 1e-6f ? w.steepness / denom : 0.0f;
 
         result.x += q * w.amplitude * dx * cos_p;
         result.y += q * w.amplitude * dy * cos_p;
